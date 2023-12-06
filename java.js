@@ -1,12 +1,8 @@
-window.onscroll = function() { makeHeaderSticky() };
+window.onscroll = function() { scrollFunction() };
 
-var header = document.getElementById("header");
-var sticky = header.offsetTop;
-
-function makeHeaderSticky() {
-    if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
+function scrollFunction() {
+    var header = document.getElementById("myHeader");
+    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        header.style.backgroundColor = "black"; // Change this to the desired color
     } else {
-        header.classList.remove("sticky");
-    }
-}
+        header.style.backgroundColor = "transparent"; }}
