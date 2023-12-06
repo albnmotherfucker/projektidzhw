@@ -63,11 +63,9 @@ nav{
 nav button{
     border: 0;
     outline: 0;
-    background: transparent;
-    color: #ffffff;
-    padding: 7px 20px;
-    font-size: 20px;
-    border-radius: 3px;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 10px;
     margin-left: 10px;
     cursor: pointer;
 }
@@ -118,6 +116,7 @@ nav button:hover{
 .img-col{
     flex-basis: 50%;
     margin-bottom: 20px;
+    
 }
 
 .img-col img{
@@ -239,7 +238,9 @@ input[type="radio"]{
 .faq .email-signup button:hover {
     background-color: #87898b;
 }
-
+#small{
+    font-size: 20px;
+}
 .faq .email-signup small {
     font-size: 20px;
     margin-top: 10px;
@@ -322,7 +323,9 @@ input[type="radio"]{
     .Pastaj .row{
         padding: 10px 0;
     }
+    
 
 
 }
+
 
