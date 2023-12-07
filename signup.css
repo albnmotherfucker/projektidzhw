@@ -81,7 +81,7 @@ nav button:hover {
     width: 90%;
     max-width: 450px;
     position: absolute;
-    top: -21%;
+    top: 0;
     left: 50%;
     transform: translate(-50%, 50%);
     background: rgb(255, 255, 255);
@@ -104,7 +104,7 @@ nav button:hover {
     border-radius: 3px;
     background: rgb(0, 0, 0);
     position: absolute;
-    bottom: -12%;
+    bottom: -15%;
     left: 50%;
     transform: translate(-50%);
 }
@@ -133,7 +133,8 @@ input {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin: -15px;
+    
+    
 }
 
 .btn-field button {
@@ -146,10 +147,11 @@ input {
     outline: 0;
     cursor: pointer;
     transition: background 1s;
+   
 }
 
 .input-group {
-    height: 280px;
+    height: 250px;
 }
 
 .btn-field button.disable {
