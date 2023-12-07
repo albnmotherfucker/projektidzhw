@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+
+<body>
+    <div class="header" id="myHeader">
+        <nav>
+            <a href="projekti.html"><img src="luciano_main-350x120 (1).png" class="logo"></a>
+            <div>
+                <a href="produktet.html"><button>Products</button></a>
+                <a href="about.html"><button>About Us</button></a>
+                <a href="signup.html"><button>Sign Up</button></a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="formbox">
+            <h1 id="title">Sign Up</h1>
+            <form>
+                <div class="input-group">
+                    <div class="input-field" id="nameField">
+                        <input type="text" placeholder="Name" required>
+                    </div>
+                    <div class="input-field">
+                        <input type="email" placeholder="E-Mail" required>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" placeholder="Password" required>
+                    </div>
+                    <p id="erjoni">Forgot password <a href="#">Click here</a></p>
+                </div>
+                <div class="btn-field">
+                    <button type="button" id="signupbtn">Sign up</button>
+                    <button type="button" id="singinbtn" class="disable">Sign in</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let signupbtn = document.getElementById("signupbtn");
+        let singinbtn = document.getElementById("singinbtn");
+        let nameField = document.getElementById("nameField");
+        let title = document.getElementById("title");
+
+        singinbtn.onclick = function () {
+            nameField.style.maxHeight = "0";
+        }
+    </script>
+
+</body>
+
+</html>
