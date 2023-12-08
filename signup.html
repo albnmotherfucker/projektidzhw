@@ -26,13 +26,14 @@
             <form>
                 <div class="input-group">
                     <div class="input-field" id="nameField">
-                        <input type="text" placeholder="Name" required>
+                        <input type="text" placeholder="Name" required pattern="[A-Za-z\s]+" title="Enter a valid name (letters and spaces only)">
                     </div>
                     <div class="input-field">
                         <input type="email" placeholder="E-Mail" required>
                     </div>
                     <div class="input-field">
-                        <input type="password" placeholder="Password" required>
+                        <input type="password" placeholder="Password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+                            title="Password must be at least 8 characters long and include one letter, one number, and one special character">
                     </div>
                     <p id="erjoni">Forgot password <a href="#">Click here</a></p>
                 </div>
@@ -45,15 +46,79 @@
     </div>
 
     <script>
-        let signupbtn = document.getElementById("signupbtn");
-        let singinbtn = document.getElementById("singinbtn");
-        let nameField = document.getElementById("nameField");
-        let title = document.getElementById("title");
+        
+    let signupbtn = document.getElementById("signupbtn");
+    let singinbtn = document.getElementById("singinbtn");
+    let nameField = document.getElementById("nameField");
+    let title = document.getElementById("title");
 
-        singinbtn.onclick = function () {
-            nameField.style.maxHeight = "0";
+    singinbtn.onclick = function () {
+        nameField.style.maxHeight = "0";
+    }
+
+    signupbtn.onclick = function () {
+        nameField.style.maxHeight = "60px";
+        title.innerHTML = "Sign Up";
+        signupbtn.classList.add("disable");
+        singinbtn.classList.remove("disable");
+    }
+
+    singinbtn.onclick = function () {
+        nameField.style.maxHeight = "0";
+        title.innerHTML = "Sign In";
+        signupbtn.classList.remove("disable");
+        singinbtn.classList.add("disable");
+    }
+
+    function performSignup() {
+        // Validate the form
+        let isValid = validateForm();
+
+        if (isValid) {
+            // Perform signup logic here
+            alert("Sign up successful!");
         }
-    </script>
+    }
+
+    function validateForm() {
+        let nameValue = nameField.querySelector('input').value;
+        let emailValue = document.querySelector('.input-field input[type="email"]').value;
+        let passwordValue = document.querySelector('.input-field input[type="password"]').value;
+
+        // Name validation (letters and spaces only)
+        let nameRegex = /^[A-Za-z\s]+$/;
+        if (!nameRegex.test(nameValue)) {
+            alert("Enter a valid name (letters and spaces only)");
+            return false;
+        }
+
+        // Email validation (basic format)
+        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailValue)) {
+            alert("Enter a valid email address");
+            return false;
+        }
+
+        // Password validation (at least 8 characters with one letter, one number, and one special character)
+        let passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        if (!passwordRegex.test(passwordValue)) {
+            alert("Password must be at least 8 characters long and include one letter, one number, and one special character");
+            return false;
+        }
+
+        return true;
+    }
+
+    document.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            if (document.activeElement === signupbtn) {
+                performSignup();
+            }
+        }
+    });
+
+    signupbtn.addEventListener("click", performSignup);
+</script>
 
 </body>
 
