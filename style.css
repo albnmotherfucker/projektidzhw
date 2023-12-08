@@ -286,7 +286,13 @@ input[type="radio"]{
     text-align: start;
     padding: 20px;
     margin: 100px auto; 
+    
 }
+.fotoabout img {
+    width: 100%;
+    height: auto;
+}
+
 #aboutluciano{
     font-size: 40px;
 }
