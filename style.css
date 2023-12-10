@@ -254,7 +254,7 @@ input[type="radio"]{
     padding: 50px 15% 10px;
     border-top: 6px solid #333;
     color: #87898b;
-    align-items: end;
+    align-items: Start;
 }
 
 .footer h2{
