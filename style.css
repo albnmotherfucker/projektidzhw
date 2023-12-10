@@ -42,10 +42,10 @@ body{
 }
 
 nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 10px;
    
 }
 
@@ -307,9 +307,10 @@ input[type="radio"]{
 
 .product {
     text-align: center;
-    width: calc(33.33% - 40px); 
+    width: calc(20% - 40px); 
     margin: 20px;
     padding: 10px;
+    
     
     
 }
@@ -366,8 +367,29 @@ input[type="radio"]{
         padding: 10px 0;
     }
     
-
-
 }
 
 
+.line{
+    margin-top: 101px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    border: solid 2px rgb(149, 148, 146);
+    background-color: #ffffff;
+    height: 45px;
+    font-size: 20px;
+}
+
+.line a{
+    text-decoration: none;
+    color: black;
+    
+}
+.gjesendet a{
+    justify-content: space-between;
+    padding-left: 10px;
+    margin: 10px;
+    
+}
