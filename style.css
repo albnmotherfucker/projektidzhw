@@ -254,6 +254,7 @@ input[type="radio"]{
     padding: 50px 15% 10px;
     border-top: 6px solid #333;
     color: #87898b;
+    align-items: end;
 }
 
 .footer h2{
@@ -316,6 +317,11 @@ input[type="radio"]{
     width:20%;
     margin: 15px;
 }
+.product:hover{
+  transform: scale(1.1);
+    transition: all 0.5s ease;
+}
+
 .kocka{
     height: 100px;
     text-align: left;
@@ -380,6 +386,10 @@ input[type="radio"]{
     .text-col, .img-col{
         flex-basis: 100%;
     }
+    .visit{
+        display: none;
+    }
+    
 
     .Pastaj h2{
         font-size: 15px;
@@ -414,19 +424,19 @@ input[type="radio"]{
 
 
     .footer {
-        padding: 30px 5% 10px; /* Adjusted padding for better spacing */
+        padding: 30px 5% 10px; 
     }
 
     .footer .col {
-        flex-basis: 100%; /* Adjusted for better responsiveness */
+        flex-basis: 100%; 
         flex-grow: 1;
         margin-bottom: 20px;
     }
 
     .footer .row {
         align-items: center;
-        justify-content: center; /* Adjusted for better centering */
-        flex-wrap: wrap; /* Adjusted for better responsiveness */
+        justify-content: center; 
+        flex-wrap: wrap; 
     }
 }
     

@@ -1,0 +1,32 @@
+.footeri {
+    padding-top: 15px;
+    border-top: solid 6px rgb(78, 77, 77);
+    width: 100%;
+    background-color: transparent; /* Add a background color for better visibility */
+}
+
+.footeri h2 {
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.footeri .col {
+    flex-basis: 25%;
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.footeri .col a {
+    display: block;
+    text-decoration: none;
+    color: #87898b;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.footeri .row {
+    display: flex; /* Add display: flex to the row */
+    justify-content: space-between; /* Align columns with space between them */
+    padding: 10px 0;
+}
