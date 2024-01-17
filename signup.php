@@ -47,73 +47,74 @@
     </div>
 
     <script>
-       let signupbtn = document.getElementById("signupbtn");
-        let singinbtn = document.getElementById("signinbtn");
-        let nameField = document.getElementById("nameField");
-        let title = document.getElementById("title");
+    let signupbtn = document.getElementById("signupbtn");
+    let singinbtn = document.getElementById("signinbtn");
+    let nameField = document.getElementById("nameField");
+    let title = document.getElementById("title");
 
-        singinbtn.onclick = function () {
-            nameField.style.maxHeight = "0";
+    singinbtn.onclick = function () {
+        nameField.style.maxHeight = "0";
+        title.innerHTML = "Sign In";
+        signupbtn.classList.remove("disable");
+        singinbtn.classList.add("disable");
+    }
+
+    signupbtn.onclick = function () {
+        nameField.style.maxHeight = "60px";
+        title.innerHTML = "Sign Up";
+        signupbtn.classList.add("disable");
+        singinbtn.classList.remove("disable");
+    }
+
+    function performSignup() {
+        let isValid = validateForm();
+        if (isValid) {
+            alert("Sign up successful!");
+            window.location.href = "projekti.html";
         }
+    }
 
-        signupbtn.onclick = function () {
-            nameField.style.maxHeight = "60px";
-            title.innerHTML = "Sign Up";
-            signupbtn.classList.add("disable");
-            singinbtn.classList.remove("disable");
-        }
+    function validateForm() {
+        let nameValue = nameField.querySelector('input').value;
+        let emailValue = document.querySelector('.input-field input[type="email"]').value;
+        let passwordValue = document.querySelector('.input-field input[type="password"]').value;
 
-        singinbtn.onclick = function () {
-            nameField.style.maxHeight = "0";
-            title.innerHTML = "Sign In";
-            signupbtn.classList.remove("disable");
-            singinbtn.classList.add("disable");
-        }
+        let nameRegex = /^[A-Za-z\s]+$/;
 
-        function performSignup() {
-            let isValid = validateForm();
-            if (isValid) {
-                alert("Sign up successful!");
-                window.location.href = "projekti.html";
-            }
-        }
-
-        function validateForm() {
-            let nameValue = nameField.querySelector('input').value;
-            let emailValue = document.querySelector('.input-field input[type="email"]').value;
-            let passwordValue = document.querySelector('.input-field input[type="password"]').value;
-
-            let nameRegex = /^[A-Za-z\s]+$/;
+        // Check if the "Sign In" button is active before validating the name
+        if (singinbtn.classList.contains("disable")) {
             if (!nameRegex.test(nameValue)) {
                 alert("Enter a valid name (letters and spaces only)");
                 return false;
             }
-
-            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(emailValue)) {
-                alert("Enter a valid email address");
-                return false;
-            }
-
-            let passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-            if (!passwordRegex.test(passwordValue)) {
-                alert("Password must be at least 8 characters long and include one letter, one number, and one special character");
-                return false;
-            }
-
-            return true;
         }
 
-        document.addEventListener("keyup", function (event) {
-            if (event.key === "Enter") {
-                if (document.activeElement === signupbtn) {
-                    performSignup();
-                }
-            }
-        });
+        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailValue)) {
+            alert("Enter a valid email address");
+            return false;
+        }
 
-        signupbtn.addEventListener("click", performSignup);
-    </script>
+        let passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        if (!passwordRegex.test(passwordValue)) {
+            alert("Password must be at least 8 characters long and include one letter, one number, and one special character");
+            return false;
+        }
+
+        return true;
+    }
+
+    document.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            if (document.activeElement === signupbtn) {
+                performSignup();
+            }
+        }
+    });
+
+    signupbtn.addEventListener("click", performSignup);
+</script>
+
 </body>
 
 </html>

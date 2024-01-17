@@ -1,7 +1,7 @@
 <?php
 $Name = isset($_POST['Name']) ? filter_var($_POST['Name'], FILTER_SANITIZE_STRING) : "";
 $Email = isset($_POST['Email']) ? filter_var($_POST['Email'], FILTER_SANITIZE_EMAIL) : "";
-$Password = isset($_POST['Password']) ? password_hash($_POST['Password'], PASSWORD_DEFAULT) : "";
+$Password = isset($_POST['Password']) ? $_POST['Password'] : ""; // Store the original password
 
 $servername = "localhost";
 $username = "root";
@@ -18,7 +18,8 @@ $stmt = mysqli_prepare($conn, "INSERT INTO erjoni3 (Name, Email, Password) VALUE
 mysqli_stmt_bind_param($stmt, "sss", $Name, $Email, $Password);
 
 if (mysqli_stmt_execute($stmt)) {
-    echo "Registration successful.";
+    header("Location: projekti.php");
+    exit();
 } else {
     echo "Error: " . mysqli_error($conn);
 }
