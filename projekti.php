@@ -11,11 +11,11 @@
 <body>
     <div class="header" id="myHeader">
         <nav>
-            <a href="projekti.html"><img src="luciano_main-350x120 (1).png" class="logo"></a>
+            <a href="projekti.php"><img src="luciano_main-350x120 (1).png" class="logo"></a>
             <div>
-                <a href="produktet.html"><button>Products</button></a>
-                <a href="about.html"><button>About Us</button></a>
-                <a href="signup.html"><button>Sign Up</button></a>          
+                <a href="produktet.php"><button>Products</button></a>
+                <a href="about.php"><button>About Us</button></a>
+                <a href="signup.php"><button>Sign Up</button></a>          
             </div>
         </nav>  
     </div>
@@ -27,10 +27,10 @@
    <div class="Pastaj">
         <div class="row">
             <div class="text-col">
-                <h2>Experience the epitome of style and comfort. Our suits aren't just garments; they're statements.<br><br> Make yours today.</h2>
+                <h2>Experience the epitomee of style and comfort. Our suits aren't just garments; they're statements.<br><br> Make yours today.</h2>
             </div>
             <div class="img-col">
-                <a href="produktet.html"><img src="bosedheky.jpg"></a>
+                <a href="produktet.php"><img src="bosedheky.jpg"></a>
             </div>
         </div>
     </div>

@@ -1,3 +1,6 @@
+<?php 
+include 'connect.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,11 +14,11 @@
 <body>
     <div class="header" id="myHeader">
         <nav>
-            <a href="projekti.html"><img src="luciano_main-350x120 (1).png" class="logo"></a>
+            <a href="projekti.php"><img src="luciano_main-350x120 (1).png" class="logo"></a>
             <div>
-                <a href="produktet.html"><button>Products</button></a>
-                <a href="about.html"><button>About Us</button></a>
-                <a href="signup.html"><button>Sign Up</button></a>
+            <a href="produktet.php"><button>Products</button></a>
+                <a href="about.php"><button>About Us</button></a>
+                <a href="signup.php"><button>Sign Up</button></a>
             </div>
         </nav>
     </div>
@@ -29,7 +32,7 @@
                         <input type="text" placeholder="Name" required pattern="[A-Za-z\s]+" title="Enter a valid name (letters and spaces only)">
                     </div>
                     <div class="input-field">
-                        <input type="email" placeholder="E-Mail" required>
+                        <input type="email" placeholder="Email" required>
                     </div>
                     <div class="input-field">
                         <input type="password" placeholder="Password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
