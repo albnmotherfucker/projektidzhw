@@ -1,13 +1,10 @@
-<?php 
-include 'connect.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" href="signup.css">
 </head>
 
@@ -16,7 +13,7 @@ include 'connect.php';
         <nav>
             <a href="projekti.php"><img src="luciano_main-350x120 (1).png" class="logo"></a>
             <div>
-            <a href="produktet.php"><button>Products</button></a>
+                <a href="produktet.php"><button>Products</button></a>
                 <a href="about.php"><button>About Us</button></a>
                 <a href="signup.php"><button>Sign Up</button></a>
             </div>
@@ -26,22 +23,23 @@ include 'connect.php';
     <div class="container">
         <div class="formbox">
             <h1 id="title">Sign Up</h1>
-            <form>
+            <form action="process_signup.php" method="post">
                 <div class="input-group">
                     <div class="input-field" id="nameField">
-                        <input type="text" placeholder="Name" required pattern="[A-Za-z\s]+" title="Enter a valid name (letters and spaces only)">
+                        <input type="text" name="Name" placeholder="Name" required pattern="[A-Za-z\s]+"
+                            title="Enter a valid name (letters and spaces only)">
                     </div>
                     <div class="input-field">
-                        <input type="email" placeholder="Email" required>
+                        <input type="email" name="Email" placeholder="Email" required>
                     </div>
                     <div class="input-field">
-                        <input type="password" placeholder="Password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+                        <input type="password" name="Password" placeholder="Password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                             title="Password must be at least 8 characters long and include one letter, one number, and one special character">
                     </div>
                     <p id="erjoni">Forgot password <a href="#">Click here</a></p>
                 </div>
                 <div class="btn-field">
-                    <button type="button" id="signupbtn">Sign up</button>
+                    <button type="submit" id="signupbtn">Sign up</button>
                     <button type="button" id="signinbtn" class="disable">Sign in</button>
                 </div>
             </form>
@@ -49,7 +47,7 @@ include 'connect.php';
     </div>
 
     <script>
-        let signupbtn = document.getElementById("signupbtn");
+       let signupbtn = document.getElementById("signupbtn");
         let singinbtn = document.getElementById("signinbtn");
         let nameField = document.getElementById("nameField");
         let title = document.getElementById("title");
