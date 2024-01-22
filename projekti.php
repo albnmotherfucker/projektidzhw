@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +28,7 @@
    <div class="Pastaj">
         <div class="row">
             <div class="text-col">
-                <h2>Experience the epitomee of style and comfort. Our suits aren't just garments; they're statements.<br><br> Make yours today.</h2>
+                <h2>Experience the epitome of style and comfort. Our suits aren't just garments; they're statements.<br><br> Make yours today.</h2>
             </div>
             <div class="img-col">
                 <a href="produktet.php"><img src="bosedheky.jpg"></a>
@@ -87,7 +88,7 @@
         </ul>
         <div>
             <small id="small">Sign up with your email to get started.</small>
-            <form class="email-signup" action="signup.html">
+            <form class="email-signup" action="signup.php">
                 <button type="submit">Get Started</button>
             </form>
         </div>

@@ -26,7 +26,20 @@ body{
    transition: all 0.2s ease;
 }
 
+.rioni{
+    
+    background-image: linear-gradient(rgba(43, 42, 42, 0.096), rgba(15, 15, 15, 0.418)),url(bosi.jpg);
+    
 
+    background-size: cover;
+    
+    width: 100%;
+    height: 100vh;
+    
+    
+
+
+}
 
 nav{
             display: flex;

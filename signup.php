@@ -1,4 +1,4 @@
-<?php
+    <?php
 if(isset($_POST['submit'])){
     include "connection.php";
     $username = $_POST['user'];
@@ -55,13 +55,13 @@ if(isset($_POST['submit'])){
       <div id="form">
         <h1>Signup Form</h1>
         <form name="form" action="signup.php" method="POST">
-            <label>Enter Username</label>
+            <label>Enter Username:</label>
             <input type="text" id="user" name="user" required><br><br>
-            <label>Enter Email</label>
+            <label>Enter Email:</label>
             <input type="email" id="email" name="email" required><br><br>
-            <label>Enter Password</label>
+            <label>Enter Password:</label>
             <input type="password" id="pass" name="pass" required><br><br>
-            <label>Retype Password</label>
+            <label>Retype Password:</label>
             <input type="password" id="cpass" name="cpass" required><br><br>
             <input type="submit" id ="btn" value ="Signup" name = "submit"/>
         </form>
