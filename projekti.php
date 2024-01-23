@@ -14,9 +14,10 @@
         <nav>
             <a href="projekti.php"><img src="luciano_main-350x120 (1).png" class="logo"></a>
             <div>
-                <a href="produktet.php"><button>Productsss</button></a>
+                <a href="produktet.php"><button>Products</button></a>
                 <a href="about.php"><button>About Us</button></a>
-                <a href="signup.php"><button>Sign Up</button></a>          
+                <!-- <a href="signup.php"><button>Sign Up</button></a>           -->
+                <a href="login.php"><button>Log In</button></a>          
             </div>
         </nav>  
     </div>

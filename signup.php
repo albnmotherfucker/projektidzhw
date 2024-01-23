@@ -1,4 +1,4 @@
-    <?php
+<?php
 if(isset($_POST['submit'])){
     include "connection.php";
     $username = $_POST['user'];
@@ -15,30 +15,37 @@ if(isset($_POST['submit'])){
     
     if($count_user==0 || $count_email==0){
         if($password==$cpassword){
-            $hash = password_hash($password,PASSWORD_DEFAULT);
-            $sql = "insert into users(username, email,password) values('$username','$email', '$hash')";
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            $sql = "insert into users(username, email, password) values('$username','$email', '$hash')";
             $result = mysqli_query($conn,$sql);
-
+            
+            if($result){
+                echo '<script>
+                    alert("Hi ' . $username . '! Signup is successful!");
+                    window.location.href = "projekti.php";
+                </script>';
+            } else {
+                echo '<script>
+                    alert("Signup failed. Please try again.");
+                    window.location.href = "signup.php";
+                </script>';
+            }
         }
         else{
-            echo'<script>
-            alert(" passwords do not match!!!");
-            window.location.href = "signup.php";
+            echo '<script>
+                alert("Passwords do not match!!!");
+                window.location.href = "signup.php";
             </script>';
         }
     }
     else{
-        echo'<script>
-        alert("us   !!!");
-        window.location.href = "index.php";
-       </script>';
+        echo '<script>
+            alert("Account already exists!!!");
+            window.location.href = "signup.php";
+        </script>';
     }
 }
-    
-
-
 ?>
-
 
 <!doctype html>
 <html lang="en">
@@ -53,19 +60,15 @@ if(isset($_POST['submit'])){
       <?php include "navbar.php";?>
  
       <div id="form">
-        <h1>Signup Form</h1>
-        <form name="form" action="signup.php" method="POST">
-            <label>Enter Username:</label>
-            <input type="text" id="user" name="user" required><br><br>
-            <label>Enter Email:</label>
-            <input type="email" id="email" name="email" required><br><br>
-            <label>Enter Password:</label>
-            <input type="password" id="pass" name="pass" required><br><br>
-            <label>Retype Password:</label>
-            <input type="password" id="cpass" name="cpass" required><br><br>
-            <input type="submit" id ="btn" value ="Signup" name = "submit"/>
-        </form>
-    </div>
+    <h1>Sign Up</h1>
+    <form name="form" action="signup.php" method="POST">
+        <input type="text" id="user" name="user" required placeholder="Enter Username"><br><br>
+        <input type="email" id="email" name="email" required placeholder="Enter Email"><br><br>
+        <input type="password" id="pass" name="pass" required placeholder="Enter Password"><br><br>
+        <input type="password" id="cpass" name="cpass" required pattern=".{8,}" title="Password must be at least 8 characters long" placeholder="Retype Password"><br><br>
+        <input type="submit" id="btn" value="Sign Up" name="submit"/>
+    </form>
+</div>
 
      </body>
 </html>

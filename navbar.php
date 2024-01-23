@@ -5,7 +5,6 @@
             <div>
                 <a href="signup.php"><button>Sign Up</button></a>
                 <a href="login.php"><button>Log In</button></a>
-                <a href=""><button>Log Out</button></a>
             </div>
         </nav>
     </div>
@@ -67,9 +66,9 @@ nav button {
 }
 
 nav button:hover {
-    background-color: rgb(37, 35, 35);
-    color: #ffffff;
-    transform: scaleX(15px);
+    background-color: white;
+    color: black;
+    transform: scaleX(20px);
     transition: all 0.5s ease;
 }
 

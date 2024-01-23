@@ -8,11 +8,11 @@ if(isset($_POST['submit'])){
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-    if($row){
-    if(password_verify($password, $row['password'])){
-      header("Location: welcome.php");
-    }
+    if ($row && password_verify($password, $row['password'])) {
+      header("Location: projekti.php");
+      exit(); 
   }
+  
   else{
     echo '<script>
       alert("Invalid username or password!!");
@@ -35,14 +35,15 @@ if(isset($_POST['submit'])){
   <body>
     <?php include "navbar.php";?>
     
-    <div id  = "form" ></div>
-    <h1>Login form</h1>
+    <div id  = "form" >
+    <h1>Log In</h1>
     <form name ="form" action ="login.php"  method ="POST">
-        <label > Enter Username/Email</label>   
-        <input type="text" id = "user" name = "user" required><br><br>
-        <label >Enter Password</label>
-        <input type="password" id = "pass" name = "pass" required><br><br>   
-        <input type="submit" id ="btn" value ="login" name = "submit"/>
+        <input type="text" id="user" name="user" required placeholder="Enter Username"><br><br>
+        <input type="password" id="pass" name="pass" required placeholder="Enter Password"><br><br>
+        <input type="submit" id="btn" value="Log In" name="submit"/>
+    </form>
 
+    <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
+</div>
    </body>
 </html>
