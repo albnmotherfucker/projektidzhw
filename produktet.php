@@ -14,6 +14,14 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Product Page</title>
    <link rel="stylesheet" href="style.css">
+   <style>
+      
+      .product img {
+         width: 200px; 
+         height: 200px; 
+      }
+   </style>
+
 </head>
 
 <body>
@@ -38,12 +46,12 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
    <div class="product-container">
       <?php
       foreach ($products as $product) {
-      ?>
+      ?>     
          <div class="product">
             <img src="<?php echo 'uploaded_img/' . $product['image']; ?>" alt="Product Image">
             <div class="kocka">
                <h3><?php echo $product['name']; ?></h3>
-               <p>Price: $<?php echo $product['price']; ?></p>
+               <p>Price: <?php echo $product['price']; ?>€</p>
             </div>
          </div>
       <?php

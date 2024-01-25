@@ -1,5 +1,6 @@
 <?php
 @include 'config.php';
+@include 'navbar.php';
 
 if (isset($_POST['add_product'])) {
    $product_name = $_POST['product_name'];
@@ -17,7 +18,6 @@ if (isset($_POST['add_product'])) {
          move_uploaded_file($product_image_tmp_name, $product_image_folder);
          $message[] = 'New product added successfully';
 
-         // Redirect after successful form submission
          header('Location: ' . $_SERVER['PHP_SELF']);
          exit();
       } else {
@@ -82,7 +82,7 @@ if (isset($message)) {
             <tr>
                <td><img src="uploaded_img/<?php echo $row['image']; ?>" height="100" alt=""></td>
                <td><?php echo $row['name']; ?></td>
-               <td>$<?php echo $row['price']; ?>/-</td>
+               <td>€<?php echo $row['price']; ?>/-</td>
                <td>
                   <a href="admin_update.php?edit=<?php echo $row['id']; ?>" class="btn"> <i class="fas fa-edit"></i> edit </a>
                   <a href="admin_page.php?delete=<?php echo $row['id']; ?>" class="btn"> <i class="fas fa-trash"></i> delete </a>
@@ -92,6 +92,36 @@ if (isset($message)) {
       </table>
    </div>
 </div>
+
+<div class="footer">
+   <link rel="stylesheet" href="style.css">
+        <h2>Questions? call 044-620328</h2>
+        <div class="row">
+            <div class="col">
+                <a href="#">FAQ</a>
+                <a href="#">Investor Relations</a>
+                <a href="#">Privacy</a>
+                <a href="#">Speed test</a>
+            </div>
+            <div class="col">
+                <a href="#">Help Center</a>
+                <a href="#">Jobs</a>
+                <a href="#">Cookies Preferences</a>
+                <a href="#">Legal Notices</a>
+            </div>
+            <div class="col">
+                <a href="#">Account</a>
+                <a href="#">Ways to buy</a>
+                <a href="#">Information</a>
+                <a href="#">Only in Lucioano</a>
+            </div>
+            <div class="col">
+                <a href="#">Media center</a>
+                <a href="#">Terms of use</a>
+                <a href="#">Contact us</a>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
