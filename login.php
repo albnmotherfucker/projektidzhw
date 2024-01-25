@@ -11,7 +11,7 @@ if(isset($_POST['submit'])){
 
     if ($row && password_verify($password, $row['password'])) {
         if ($username == 'erjon' && $password == 'erjonbosi') {
-            header("Location: admin.php");
+            header("Location: admin_page.php");
             exit();
         } else {
             header("Location: projekti.php");
