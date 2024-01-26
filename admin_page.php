@@ -1,37 +1,75 @@
 <?php
-@include 'config.php';
-@include 'navbar.php';
 
-if (isset($_POST['add_product'])) {
-   $product_name = $_POST['product_name'];
-   $product_price = $_POST['product_price'];
-   $product_image = $_FILES['product_image']['name'];
-   $product_image_tmp_name = $_FILES['product_image']['tmp_name'];
-   $product_image_folder = 'uploaded_img/' . $product_image;
+include 'config.php';
+include 'navbar.php';
 
-   if (empty($product_name) || empty($product_price) || empty($product_image)) {
-      $message[] = 'Please fill out all fields';
-   } else {
-      $insert = "INSERT INTO products(name, price, image) VALUES('$product_name', '$product_price', '$product_image')";
-      $upload = mysqli_query($conn, $insert);
-      if ($upload) {
-         move_uploaded_file($product_image_tmp_name, $product_image_folder);
-         $message[] = 'New product added successfully';
+class AdminPage
+{
+    private $conn;
 
-         header('Location: ' . $_SERVER['PHP_SELF']);
-         exit();
-      } else {
-         $message[] = 'Could not add the product';
-      }
-   }
+    public function __construct($conn)
+    {
+        $this->conn = $conn;
+    }
+
+    public function addProduct()
+    {
+        if (isset($_POST['add_product'])) {
+            $product_name = $_POST['product_name'];
+            $product_price = $_POST['product_price'];
+            $product_image = $_FILES['product_image']['name'];
+            $product_image_tmp_name = $_FILES['product_image']['tmp_name'];
+            $product_image_folder = 'uploaded_img/' . $product_image;
+
+            if (empty($product_name) || empty($product_price) || empty($product_image)) {
+                $message[] = 'Please fill out all fields';
+            } else {
+                $insert = "INSERT INTO products(name, price, image) VALUES('$product_name', '$product_price', '$product_image')";
+                $upload = mysqli_query($this->conn, $insert);
+                if ($upload) {
+                    move_uploaded_file($product_image_tmp_name, $product_image_folder);
+                    $message[] = 'New product added successfully';
+
+                    header('Location: ' . $_SERVER['PHP_SELF']);
+                    exit();
+                } else {
+                    $message[] = 'Could not add the product';
+                }
+            }
+        }
+    }
+
+    public function deleteProduct()
+    {
+        if (isset($_GET['delete'])) {
+            $id = $_GET['delete'];
+            mysqli_query($this->conn, "DELETE FROM products WHERE id = $id");
+            header('location:admin_page.php');
+            exit();
+        }
+    }
+
+    public function displayProducts()
+    {
+        $select = mysqli_query($this->conn, "SELECT * FROM products");
+        return $select;
+    }
+
+    public function showMessage()
+    {
+        if (isset($message)) {
+            foreach ($message as $message) {
+                echo '<span class="message">' . $message . '</span>';
+            }
+        }
+    }
 }
 
-if (isset($_GET['delete'])) {
-   $id = $_GET['delete'];
-   mysqli_query($conn, "DELETE FROM products WHERE id = $id");
-   header('location:admin_page.php');
-   exit();
-}
+$adminPage = new AdminPage($conn);
+
+$adminPage->addProduct();
+$adminPage->deleteProduct();
+
 ?>
 
 <!DOCTYPE html>

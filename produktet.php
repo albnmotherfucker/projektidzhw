@@ -1,9 +1,15 @@
 <?php
 @include 'config.php';
 
-// Fetch products from the database
-$result = mysqli_query($conn, "SELECT * FROM products");
+$productsPerPage = 24;
+
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+$startIndex = ($page - 1) * $productsPerPage;
+
+$result = mysqli_query($conn, "SELECT * FROM products LIMIT $startIndex, $productsPerPage");
 $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -15,31 +21,26 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
    <title>Product Page</title>
    <link rel="stylesheet" href="style.css">
    <style>
-      
       .product img {
-         width: 200px; 
-         height: 200px; 
+         width: 200px;
+         height: 200px;
       }
    </style>
-
 </head>
 
 <body>
-<div class="header" id="myHeader" style="background-color: black;">
-        <nav>
-            <a href="projekti.html"><img src="luciano_main-350x120 (1).png" class="logo"></a>
-            <div>
-                <a href="produktet.php"><button>Products</button></a>
-                <a href="about.php"><button>About Us</button></a>
-                <a href="signup.php"><button>Sign Up</button></a>
-            </div>
-        </nav>
-    </div>
+   <div class="header" id="myHeader" style="background-color: black;">
+      <nav>
+         <a href="projekti.html"><img src="luciano_main-350x120 (1).png" class="logo"></a>
+         <div>
+            <a href="produktet.php"><button>Products</button></a>
+            <a href="about.php"><button>About Us</button></a>
+            <a href="signup.php"><button>Sign Up</button></a>
+         </div>
+      </nav>
+   </div>
 
-
-  
-
-   <div class="visit" >
+   <div class="visit">
       <p style="font-size: 25px; margin-left: 35px;">Discover our collection</p>
    </div>
 
@@ -59,7 +60,16 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
       ?>
    </div>
 
-   
+   <div class="pagination">
+      <?php
+      $totalProducts = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM products"));
+      $totalPages = ceil($totalProducts / $productsPerPage);
+
+      for ($i = 1; $i <= $totalPages; $i++) {
+         echo '<a href="produktet.php?page=' . $i . '">' . $i . '</a> ';
+      }
+      ?>
+   </div>
    <div class="footer">
         <h2>Questions? call 044-620328</h2>
         <div class="row">
@@ -88,9 +98,7 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
             </div>
         </div>
     </div>
-
- 
-
+   
 </body>
 
 </html>
