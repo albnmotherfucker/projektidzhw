@@ -31,7 +31,7 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <body>
    <div class="header" id="myHeader" style="background-color: black;">
       <nav>
-         <a href="projekti.html"><img src="luciano_main-350x120 (1).png" class="logo"></a>
+         <a href="projekti.php"><img src="luciano_main-350x120 (1).png" class="logo"></a>
          <div>
             <a href="produktet.php"><button>Products</button></a>
             <a href="about.php"><button>About Us</button></a>
