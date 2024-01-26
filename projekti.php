@@ -16,16 +16,42 @@
             <div>
                 <a href="produktet.php"><button>Products</button></a>
                 <a href="about.php"><button>About Us</button></a>
-                <!-- <a href="signup.php"><button>Sign Up</button></a>           -->
+               
                 <a href="login.php"><button>Log In</button></a>          
             </div>
         </nav>  
     </div>
-    <div class="rioni"  >
-        <div class="header-content">
-            <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Elevate your style with timeless elegance – where every stitch tells a story of sophistication</h1>
+    
+    <section class="container">
+        <style>
+            .slider-wrapper img{
+                width: 100%;
+                height:100%;
+            }
+        </style>
+    
+        <div class="slider-wrapper">
+       
+
+            <div class="slider">
+            <h1 id="helmi" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Elevate your style with timeless elegance<br>- in our new fall/winter collection</h1>
+
+            
+
+                <img id="slide-1"      src="bosi.jpg" alt="3D rendering of an imaginary orange planet in space"  />
+                <img id="slide-2" src="Coveri_3840x2160_crop_center.webp" alt="3D rendering of an imaginary green planet in space" />
+                <img id="slide-3" src="banner_desktop_2022_2-1880x668w.jpg" alt="3D rendering of an imaginary blue planet in space" />
+            </div>
+            <div class="slider-nav">
+                <a href="#slide-1"></a>
+                <a href="#slide-2"></a>
+                <a href="#slide-3"></a>
+            </div>
         </div>
-    </div>
+    </section>
+
+
+
    <div class="Pastaj">
         <div class="row">
             <div class="text-col">
@@ -87,6 +113,53 @@
                 </div>
             </li>
         </ul>
+        <SCRIpt>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </SCRIpt>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         <div>
             <small id="small">Sign up with your email to get started.</small>
             <form class="email-signup" action="signup.php">

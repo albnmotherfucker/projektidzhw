@@ -20,7 +20,7 @@
 
         
     </div>
-    <div class="fotoabout" ><img src="lola.jpg" alt=""> </div>
+    <div class="fotoabout" ><img src="MASBOSI.JPG" alt=""> </div>
     
     <div class="tekstiabout">
     <section id="sectionabout">
