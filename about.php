@@ -20,7 +20,7 @@
 
         
     </div>
-    <div class="fotoabout" ><img src="banner_desktop_2022_1-1880x668w.jpg" alt=""> </div>
+    <div class="fotoabout" ><img src="lola.jpg" alt=""> </div>
     
     <div class="tekstiabout">
     <section id="sectionabout">
