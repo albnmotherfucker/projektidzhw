@@ -1,0 +1,98 @@
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#form {
+  background-color: rgba(255, 255, 255, 0.953);
+  width: 28%;
+  border-radius: 6px;
+  margin: 10% auto;
+  padding: 40px;
+}
+
+h1 {
+  text-align: center;
+  color: #000000;
+  margin: 3%;
+}
+
+input {
+  width: calc(100% - 10px); 
+  border-radius: 4px;
+  border: 2px solid #000000;
+  padding: 5px;
+}
+
+#btn {
+  width: 50%;
+  color: rgb(0, 0, 0);
+  background-color: rgba(143, 142, 145, 0.47);
+  padding: 10px;
+  font-weight: 700;
+  font-size: larger;
+  border-radius: 10px;
+  margin: 0 auto;
+  display: block;
+}
+
+#btn:hover {
+  transform: scale(1.01);
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+form label {
+  color: rgb(100, 100, 100);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+p {
+  margin: 8%;
+  color: black;
+}
+
+
+a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+a:hover {
+  transform: scale(1.01);
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 1350px) {
+  #form {
+    width: 40%;
+    margin-left: none;
+    padding: 40px;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  #form {
+    width: 50%;
+    margin-left: none;
+    padding: 40px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #form {
+    width: 80%;
+    margin-left: none;
+    padding: 40px;
+  }
+}

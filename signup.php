@@ -1,120 +1,74 @@
-<?php include ("connect.php");
+<?php
+if(isset($_POST['submit'])){
+    include "connection.php";
+    $username = $_POST['user'];
+    $email = $_POST['email'];
+    $password = $_POST['pass'];
+    $cpassword = $_POST['cpass'];
+    
+    $sql= "select * from users where username = '$username'";
+    $result = mysqli_query($conn, $sql);
+    $count_user = mysqli_num_rows($result);
+    $sql = "select * from users where email='$email'";
+    $result = mysqli_query($conn,$sql);
+    $count_email = mysqli_num_rows($result);
+    
+    if($count_user==0 || $count_email==0){
+        if($password==$cpassword){
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            $sql = "insert into users(username, email, password) values('$username','$email', '$hash')";
+            $result = mysqli_query($conn,$sql);
+            
+            if($result){
+                echo '<script>
+                    alert("Hi ' . $username . '! Signup is successful!");
+                    window.location.href = "projekti.php";
+                </script>';
+            } else {
+                echo '<script>
+                    alert("Signup failed. Please try again.");
+                    window.location.href = "signup.php";
+                </script>';
+            }
+        }
+        else{
+            echo '<script>
+                alert("Passwords do not match!!!");
+                window.location.href = "signup.php";
+            </script>';
+        }
+    }
+    else{
+        echo '<script>
+            alert("Account already exists!!!");
+            window.location.href = "signup.php";
+        </script>';
+    }
+}
 ?>
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rioni</title>
+    <link rel="stylesheet" href="loginstyle.css">
+  </head>
+  <body>
+      
+      <?php include "navbar.php";?>
+ 
+      <div id="form">
+    <h1>Sign Up</h1>
+    <form name="form" action="signup.php" method="POST">
+        <input type="text" id="user" name="user" required placeholder="Enter Username"><br><br>
+        <input type="email" id="email" name="email" required placeholder="Enter Email"><br><br>
+        <input type="password" id="pass" name="pass" required placeholder="Enter Password"><br><br>
+        <input type="password" id="cpass" name="cpass" required pattern=".{8,}" title="Password must be at least 8 characters long" placeholder="Retype Password"><br><br>
+        <input type="submit" id="btn" value="Sign Up" name="submit"/>
+    </form>
+</div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="signup.css">
-</head>
-
-<body>
-    <div class="header" id="myHeader">
-        <nav>
-            <a href="projekti.html"><img src="luciano_main-350x120 (1).png" class="logo"></a>
-            <div>
-                <a href="produktet.html"><button>Products</button></a>
-                <a href="about.html"><button>About Us</button></a>
-                <a href="signup.html"><button>Sign Up</button></a>
-            </div>
-        </nav>
-    </div>
-
-    <div class="container">
-        <div class="formbox">
-            <h1 id="title">Sign Up</h1>
-            <form>
-                <div class="input-group">
-                    <div class="input-field" id="nameField">
-                        <input type="text" placeholder="Name" required pattern="[A-Za-z\s]+" title="Enter a valid name (letters and spaces only)">
-                    </div>
-                    <div class="input-field">
-                        <input type="email" placeholder="E-Mail" required>
-                    </div>
-                    <div class="input-field">
-                        <input type="password" placeholder="Password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
-                            title="Password must be at least 8 characters long and include one letter, one number, and one special character">
-                    </div>
-                    <p id="erjoni">Forgot password <a href="#">Click here</a></p>
-                </div>
-                <div class="btn-field">
-                    <button type="button" id="signupbtn">Sign up</button>
-                    <button type="button" id="signinbtn" class="disable">Sign in</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        let signupbtn = document.getElementById("signupbtn");
-        let singinbtn = document.getElementById("signinbtn");
-        let nameField = document.getElementById("nameField");
-        let title = document.getElementById("title");
-
-        singinbtn.onclick = function () {
-            nameField.style.maxHeight = "0";
-        }
-
-        signupbtn.onclick = function () {
-            nameField.style.maxHeight = "60px";
-            title.innerHTML = "Sign Up";
-            signupbtn.classList.add("disable");
-            singinbtn.classList.remove("disable");
-        }
-
-        singinbtn.onclick = function () {
-            nameField.style.maxHeight = "0";
-            title.innerHTML = "Sign In";
-            signupbtn.classList.remove("disable");
-            singinbtn.classList.add("disable");
-        }
-
-        function performSignup() {
-            let isValid = validateForm();
-            if (isValid) {
-                alert("Sign up successful!");
-                window.location.href = "projekti.html";
-            }
-        }
-
-        function validateForm() {
-            let nameValue = nameField.querySelector('input').value;
-            let emailValue = document.querySelector('.input-field input[type="email"]').value;
-            let passwordValue = document.querySelector('.input-field input[type="password"]').value;
-
-            let nameRegex = /^[A-Za-z\s]+$/;
-            if (!nameRegex.test(nameValue)) {
-                alert("Enter a valid name (letters and spaces only)");
-                return false;
-            }
-
-            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(emailValue)) {
-                alert("Enter a valid email address");
-                return false;
-            }
-
-            let passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-            if (!passwordRegex.test(passwordValue)) {
-                alert("Password must be at least 8 characters long and include one letter, one number, and one special character");
-                return false;
-            }
-
-            return true;
-        }
-
-        document.addEventListener("keyup", function (event) {
-            if (event.key === "Enter") {
-                if (document.activeElement === signupbtn) {
-                    performSignup();
-                }
-            }
-        });
-
-        signupbtn.addEventListener("click", performSignup);
-    </script>
-</body>
-
+     </body>
 </html>
