@@ -47,7 +47,7 @@ class Authentication {
         $row = $this->user->getUserByUsernameOrEmail($username);
 
         if ($row && password_verify($password, $row['password'])) {
-            if ($username == 'erjon' && $password == 'erjonbosii') {
+            if ($username == 'erjon' && $password == 'erjonbosi') {
                 header("Location: admin_page.php");
                 exit();
             } else {

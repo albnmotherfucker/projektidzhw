@@ -39,8 +39,8 @@
             
 
                 <img id="slide-1"      src="bosi.jpg" alt="3D rendering of an imaginary orange planet in space"  />
-                <img id="slide-2" src="Coveri_3840x2160_crop_center.webp" alt="3D rendering of an imaginary green planet in space" />
-                <img id="slide-3" src="banner_desktop_2022_2-1880x668w.jpg" alt="3D rendering of an imaginary blue planet in space" />
+                <img id="slide-2" src="MASBOSI.jpg" alt="3D rendering of an imaginary green planet in space" />
+                <img id="slide-3" src="Coveri_3840x2160_crop_center.webp" alt="3D rendering of an imaginary blue planet in space" />
             </div>
             <div class="slider-nav">
                 <a href="#slide-1"></a>

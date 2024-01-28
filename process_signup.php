@@ -1,7 +1,7 @@
 <?php
 $Name = isset($_POST['Name']) ? filter_var($_POST['Name'], FILTER_SANITIZE_STRING) : "";
 $Email = isset($_POST['Email']) ? filter_var($_POST['Email'], FILTER_SANITIZE_EMAIL) : "";
-$Password = isset($_POST['Password']) ? $_POST['Password'] : ""; // Store the original password
+$Password = isset($_POST['Password']) ? $_POST['Password'] : ""; 
 
 $servername = "localhost";
 $username = "root";
