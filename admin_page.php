@@ -1,7 +1,7 @@
 <?php
 
 include 'config.php';
-include 'navbar.php';
+include 'navbaradmin.php';
 
 class AdminPage
 {
@@ -130,6 +130,7 @@ if (isset($message)) {
       </table>
    </div>
 </div>
+
 
 <div class="footer">
    <link rel="stylesheet" href="style.css">
