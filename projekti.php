@@ -27,6 +27,7 @@ if ($result) {
     $image1 = $row['img1'];
     $image2 = $row['img2'];
     $image3 = $row['img3'];
+    $image4 = $row['img4'];
 } else {
     die("Error fetching images: " . $conn->error);
 }
@@ -86,7 +87,7 @@ $conn->close();
                 <h2 id="caption_id2"><?php echo $latestCaption_id2; ?></h2>
             </div>
             <div class="img-col">
-                <a href="produktet.php"><img src="bosedheky.jpg"></a>
+                <a href="produktet.php"><img src="<?php echo $image4; ?>" ></a>
             </div>
         </div>
     </div>

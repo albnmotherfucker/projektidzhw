@@ -9,17 +9,18 @@ $conn = mysqli_connect('localhost', 'root', '', 'cart_db');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $targetDir = "uploaded_img";
     $uploadOk = 1;
 
     $rowId = 1;
 
-    $imgColumns = array("img1", "img2", "img3");
+    $imgColumns = array("img1", "img2", "img3", "img4"); // Add "img4" to the array
 
     $filenames = array();
 
-    for ($i = 1; $i <= 3; $i++) {
+    for ($i = 1; $i <= 4; $i++) { // Update loop limit to 4
         $fieldName = "image" . $i;
 
         if (!empty($_FILES[$fieldName]["tmp_name"])) {
@@ -34,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             echo "Error: Image $i was not provided.<br>";
         }
     }
+
     $checkQuery = "SELECT * FROM sliderimage WHERE id = $rowId";
     $result = $conn->query($checkQuery);
 
@@ -62,5 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         }
     }
 }
+
 $conn->close();
 ?>
