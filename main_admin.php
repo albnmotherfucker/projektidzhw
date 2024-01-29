@@ -34,7 +34,7 @@ include 'navbaradmin.php';
 
             <label for="image2">Image 2:</label>
             <input type="file" name="image2" id="image2" required class="box">
-
+   
             <label for="image3">Image 3:</label>
             <input type="file" name="image3" id="image3" required class="box">
 

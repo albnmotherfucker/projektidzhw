@@ -3,7 +3,7 @@
 $hostname = 'localhost';
 $username = 'root';
 $password = '';
-$database = 'db_cart';
+$database = 'cart_db';
 $conn = mysqli_connect('localhost', 'root', '', 'cart_db');
 
 if ($conn->connect_error) {
