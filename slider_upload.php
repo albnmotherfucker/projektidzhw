@@ -1,5 +1,4 @@
 <?php
-
 $hostname = 'localhost';
 $username = 'root';
 $password = '';
@@ -10,17 +9,19 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$message = "";  // Initialize $message variable
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $targetDir = "uploaded_img";
     $uploadOk = 1;
 
     $rowId = 1;
 
-    $imgColumns = array("img1", "img2", "img3", "img4"); // Add "img4" to the array
+    $imgColumns = array("img1", "img2", "img3", "img4");
 
     $filenames = array();
 
-    for ($i = 1; $i <= 4; $i++) { // Update loop limit to 4
+    for ($i = 1; $i <= 4; $i++) {
         $fieldName = "image" . $i;
 
         if (!empty($_FILES[$fieldName]["tmp_name"])) {
@@ -30,9 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 
             move_uploaded_file($_FILES[$fieldName]["tmp_name"], $targetDir . $filename);
 
-            echo "Image $i has been uploaded.<br>";
+            header("refresh:2;url=main_admin.php");
         } else {
-            echo "Error: Image $i was not provided.<br>";
+            $message = "Error: Image $i was not provided.<br>";
         }
     }
 
@@ -50,20 +51,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         $updateQuery .= " WHERE id = $rowId";
 
         if ($conn->query($updateQuery) === TRUE) {
-            echo "Images have been updated in the database.<br>";
+            $message = "Images have been updated in the database.<br>";
         } else {
-            echo "Error updating record: " . $conn->error . "<br>";
+            $message = "Error updating record: " . $conn->error . "<br>";
         }
     } else {
         $insertQuery = "INSERT INTO sliderimage (id, " . implode(", ", $imgColumns) . ") VALUES ($rowId, '" . implode("', '", $filenames) . "')";
 
         if ($conn->query($insertQuery) === TRUE) {
-            echo "Images have been added to the database.<br>";
+            $message = "Images have been added to the database.<br>";
         } else {
-            echo "Error inserting record: " . $conn->error . "<br>";
+            $message = "Error inserting record: " . $conn->error . "<br>";
         }
     }
 }
 
 $conn->close();
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            color: white;
+        }
+
+        .message-container {
+            padding: 30px;
+            background-color: black;
+            border: 2px solid white;
+            border-radius: 10px;
+            font-size: 35px;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-container">
+        <?php echo $message; ?>
+    </div>
+</body>
+</html>
