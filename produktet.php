@@ -35,7 +35,7 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
          <div>
             <a href="produktet.php"><button>Products</button></a>
             <a href="about.php"><button>About Us</button></a>
-            <a href="signup.php"><button>Sign Up</button></a>
+            <a href="login.php"><button>Log In</button></a>
          </div>
       </nav>
    </div>

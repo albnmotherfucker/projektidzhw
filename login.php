@@ -45,10 +45,16 @@ class Authentication {
 
     public function authenticate($username, $password) {
         $row = $this->user->getUserByUsernameOrEmail($username);
-
+    
         if ($row && password_verify($password, $row['password'])) {
+            // Check if the username and password match the first admin
             if ($username == 'erjon' && $password == 'erjonbosi') {
-                header("Location: admin_page.php");
+                header("Location: admin_page.php?admin=admin1");
+                exit();
+            }
+            // Check if the username and password match the second admin
+            elseif ($username == 'rion' && $password == 'rionmuti') {
+                header("Location: admin_page.php?admin=admin2");
                 exit();
             } else {
                 header("Location: projekti.php");
@@ -61,7 +67,7 @@ class Authentication {
             </script>';
         }
     }
-}
+}    
 $conn = mysqli_connect('localhost', 'root', '', 'cart_db');
 $database = new Database('localhost', 'root', '', 'cart_db');
 $conn = $database->getConnection();
