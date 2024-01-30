@@ -9,7 +9,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$message = "";  // Initialize $message variable
+$message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $targetDir = "uploaded_img";
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 
     $rowId = 1;
 
-    $imgColumns = array("img1", "img2", "img3", "img4");
+    $imgColumns = array("img1", "img2", "img3", "img4",);
 
     $filenames = array();
 

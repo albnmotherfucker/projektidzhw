@@ -1,40 +1,43 @@
 <?php
-
 $hostname = 'localhost';
 $username = 'root';
 $password = '';
 $database = 'cart_db';
-
-$conn = mysqli_connect('localhost', 'root', '', 'cart_db');
+$conn = mysqli_connect($hostname, $username, $password, $database);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $caption_id1 = $_POST["caption_id1"];
-    $caption_id2 = $_POST["caption_id2"];
+$message = "";
 
-    $caption_id1 = $conn->real_escape_string($caption_id1);
-    $caption_id2 = $conn->real_escape_string($caption_id2);
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
+    $targetDir = "uploaded_img";
+    $uploadOk = 1;
 
-  
-    $deleteQuery = "DELETE FROM projekticaption WHERE caption_id1 = '$caption_id1' OR caption_id2 = '$caption_id2'";
-    $conn->query($deleteQuery);
+    $columnName = "image";
 
-  
-    $sql = "INSERT INTO projekticaption (caption_id1, caption_id2) VALUES ('$caption_id1', '$caption_id2')";
+    if (!empty($_FILES["image"]["tmp_name"])) {
+        $filename = $_FILES["image"]["name"];
 
-    if ($conn->query($sql) === TRUE) {
-        $message = "Caption successfully submitted!";
+        move_uploaded_file($_FILES["image"]["tmp_name"], $targetDir . '/' . $filename);
+
+
+        $insertQuery = "INSERT INTO about_image (id, $columnName) VALUES (NULL, '$filename')";
+
+        if ($conn->query($insertQuery) === TRUE) {
+            $message = "Image has been added to the database.<br>";
+            header("refresh:2; url=about_admin.php");
+        } else {
+            $message = "Error inserting record: " . $conn->error . "<br>";
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        $message = "Error: Image was not provided.<br>";
     }
 }
 
 $conn->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
