@@ -11,6 +11,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$message = ""; 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $caption1 = $conn->real_escape_string($_POST["caption1"]);
     $caption2 = $conn->real_escape_string($_POST["caption2"]);
@@ -21,15 +23,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $deleteQuery = "DELETE FROM about WHERE caption1 = '$caption1' OR caption2 = '$caption2' OR caption3 = '$caption3' OR caption4 = '$caption4' OR caption5 = '$caption5'";
     $conn->query($deleteQuery);
 
-    
     $sql = "INSERT INTO about (caption1, caption2, caption3, caption4, caption5) VALUES ('$caption1', '$caption2', '$caption3', '$caption4', '$caption5')";
 
     if ($conn->query($sql) === TRUE) {
         $message = "Caption successfully submitted!";
-        header("Location: about_upload.php");
-        exit(); 
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        $message = "Error: " . $sql . "<br>" . $conn->error;
     }
 }
+
+$conn->close();
+
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            color: white;
+        }
+
+        .message-container {
+            padding: 30px;
+            background-color: black;
+            border: 2px solid white;
+            border-radius: 10px;
+            font-size: 35px;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-container">
+        <?php echo $message; ?>
+    </div>
+    
+    <script>
+        setTimeout(function(){
+            window.location.href = "about_admin.php";
+        }, 2000);
+    </script>
+</body>
+</html>
