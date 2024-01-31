@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 class Database {
     private $conn;
 
@@ -46,28 +46,28 @@ class Authentication {
     public function authenticate($username, $password) {
         $user = new User($this->conn);
         $row = $user->getUserByUsernameOrEmail($username);
-
+    
         if ($row && password_verify($password, $row['password'])) {
-            if ($username == 'erjon' && $password == 'erjonbosi') {
-                $this->updateUserRole($row['id'], 'admin1');
-                header("Location: admin_page.php?admin=admin1");
-                exit();
-            }
-            elseif ($username == 'rion' && $password == 'rionmuti') {
-                $this->updateUserRole($row['id'], 'admin2');
-                header("Location: admin_page.php?admin=admin2");
+            // Check if the username is 'erjon' or 'rion' and password matches
+            if (($username == 'erjon' && $password == 'erjonbosi') || ($username == 'rion' && $password == 'rionmuti')) {
+                $role = ($username == 'erjon') ? 'admin1' : 'admin2';
+                $this->updateUserRole($row['id'], $role);
+                header("Location: admin_page.php?admin=$role");
                 exit();
             } else {
+                // If the username is not 'erjon' or 'rion', redirect to 'projekti.php'
                 header("Location: projekti.php");
                 exit();
             }
         } else {
+            // If authentication fails, show an alert and redirect to 'login.php'
             echo '<script>
                 alert("Invalid username or password!!");
                 window.location.href = "login.php";
             </script>';
         }
     }
+    
 
     private function updateUserRole($userId, $role) {
         $userId = mysqli_real_escape_string($this->conn, $userId);

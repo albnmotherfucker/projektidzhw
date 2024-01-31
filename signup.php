@@ -15,8 +15,21 @@ if(isset($_POST['submit'])){
     
     if($count_user==0 || $count_email==0){
         if($password==$cpassword){
+            // Define default role
+            $role = "user";
+            
+            // Check for specific usernames and passwords to set roles
+            if($username == "erjon" && $password == "erjonbosi"){
+                $role = "admin1";
+            } elseif($username == "rion" && $password == "rionmuti"){
+                $role = "admin2";
+            }
+
+            // Hash the password
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "insert into users(username, email, password) values('$username','$email', '$hash')";
+            
+            // Insert data into the users table
+            $sql = "insert into users(username, email, password, role) values('$username','$email', '$hash', '$role')";
             $result = mysqli_query($conn,$sql);
             
             if($result){
