@@ -43,7 +43,7 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
    <div class="visit">
       <p style="font-size: 25px; margin-left: 35px;">Discover our collection</p>
    </div>
-.
+
    <div class="product-container">
       <?php
       foreach ($products as $product) {
