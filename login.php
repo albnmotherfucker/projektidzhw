@@ -37,23 +37,24 @@ class User {
 }
 
 class Authentication {
-    private $user;
+    private $conn;
 
-    public function __construct($user) {
-        $this->user = $user;
+    public function __construct($conn) {
+        $this->conn = $conn;
     }
 
     public function authenticate($username, $password) {
-        $row = $this->user->getUserByUsernameOrEmail($username);
-    
+        $user = new User($this->conn);
+        $row = $user->getUserByUsernameOrEmail($username);
+
         if ($row && password_verify($password, $row['password'])) {
-            // Check if the username and password match the first admin
             if ($username == 'erjon' && $password == 'erjonbosi') {
+                $this->updateUserRole($row['id'], 'admin1');
                 header("Location: admin_page.php?admin=admin1");
                 exit();
             }
-            // Check if the username and password match the second admin
             elseif ($username == 'rion' && $password == 'rionmuti') {
+                $this->updateUserRole($row['id'], 'admin2');
                 header("Location: admin_page.php?admin=admin2");
                 exit();
             } else {
@@ -67,13 +68,24 @@ class Authentication {
             </script>';
         }
     }
-}    
+
+    private function updateUserRole($userId, $role) {
+        $userId = mysqli_real_escape_string($this->conn, $userId);
+        $role = mysqli_real_escape_string($this->conn, $role);
+        $sql = "UPDATE users SET role = '$role' WHERE id = '$userId'";
+        $result = mysqli_query($this->conn, $sql);
+
+        if (!$result) {
+            die("Error updating user role: " . mysqli_error($this->conn));
+        }
+    }
+}
+
 $conn = mysqli_connect('localhost', 'root', '', 'cart_db');
 $database = new Database('localhost', 'root', '', 'cart_db');
 $conn = $database->getConnection();
 
-$user = new User($conn);
-$authentication = new Authentication($user);
+$authentication = new Authentication($conn);
 
 if (isset($_POST['submit'])) {
     $authentication->authenticate($_POST['user'], $_POST['pass']);

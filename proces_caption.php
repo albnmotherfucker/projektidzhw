@@ -27,6 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($conn->query($sql) === TRUE) {
         $message = "Caption successfully submitted!";
+        header("refresh:2;url=main_admin.php");
+
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

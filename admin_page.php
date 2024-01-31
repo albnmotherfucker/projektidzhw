@@ -24,7 +24,10 @@ class AdminPage
             if (empty($product_name) || empty($product_price) || empty($product_image)) {
                 $message[] = 'Please fill out all fields';
             } else {
-                $insert = "INSERT INTO products(name, price, image, created_at) VALUES('$product_name', '$product_price', '$product_image', NOW())";
+                // Get the user's ID from the session or wherever you store it
+                $createdBy = 1; // Replace with the actual user's ID
+
+                $insert = "INSERT INTO products(name, price, image, created_at, created_by) VALUES('$product_name', '$product_price', '$product_image', NOW(), $createdBy)";
                 $upload = mysqli_query($this->conn, $insert);
 
                 if ($upload) {
@@ -114,6 +117,7 @@ if (isset($message)) {
             <th>product name</th>
             <th>product price</th>
             <th>created at</th> <!-- New column -->
+            <th>created by</th> <!-- New column -->
             <th>action</th>
          </tr>
          </thead>
@@ -123,6 +127,7 @@ if (isset($message)) {
                <td><?php echo $row['name']; ?></td>
                <td>€<?php echo $row['price']; ?>/-</td>
                <td><?php echo $row['created_at']; ?></td> <!-- New column -->
+               <td><?php echo $row['created_by']; ?></td> <!-- New column -->
                <td>
                   <a href="admin_update.php?edit=<?php echo $row['id']; ?>" class="btn"> <i class="fas fa-edit"></i> edit </a>
                   <a href="admin_page.php?delete=<?php echo $row['id']; ?>" class="btn"> <i class="fas fa-trash"></i> delete </a>
