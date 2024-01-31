@@ -44,13 +44,14 @@ $conn->close();
     <link rel="stylesheet" href="style.css">
    
     <script src="java.js" defer></script>
-</head>
+</head>         
 <body>
     <div class="header" id="myHeader">
         <nav>
             <a href="projekti.php"><img src="luciano_main-350x120 (1).png" class="logo"></a>
             <div>
                 <a href="produktet.php"><button>Products</button></a>
+                <a href="stores.php"><button>Stores</button></a>          
                 <a href="about.php"><button>About Us</button></a>
                 <a href="login.php"><button>Log In</button></a>          
             </div>
