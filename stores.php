@@ -23,7 +23,12 @@ include 'navbar.php';
 </div>
 <div class="Titulli">
     <p> Our Staff</p>
-
+</div>
+   </div> 
+   <div class="store-intro">
+    <p>Welcome to our world of quality and style. Our stores, nestled in diverse communities, offer an inviting experience where modern aesthetics meet timeless elegance. 
+        <br>Explore curated products reflecting our commitment to excellence, guided by our knowledgeable staff. 
+   </div>
     </div>
     <div class="staffcontainer" >
         
@@ -55,9 +60,8 @@ include 'navbar.php';
     <div><img src="a9.webp" alt=""> </div>
     <div><img src="a10.webp" alt=""> </div>
     
-    
-</div>
-   </div> 
+</div></div>
+
 <div class="footer">
         <h2>Questions? Call 044-620328</h2>
         <div class="row">

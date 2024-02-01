@@ -1,109 +1,128 @@
+
 .titulli {
     display: flex;
-    padding: 10px;
+    padding: 2%;
     justify-content: center;
     margin-top: 11vh;
-    font-size: 30px;
+    font-size: 3vw;
     font-weight: bold;
+
 }
 
+/* Stores Section */
 .stores {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: row;
-    margin-top: 100px;
+    margin-top: 10%;
+   
 }
 
 .stores img {
-    margin: 0 10px;
+  
     object-fit: cover; 
     width: 400px;
     height: 300px;
     border-radius: 2px;
+   
 }
 
 .stores a {
     display: flex;
-    justify-content: start;
-    padding: 14px;
-    color: rgb(255, 255, 255);
-    font-size: 20px;
-    margin: 0 10px;
+   
+    padding: 2%;
+  text-align: center;
+    font-size: 1.5vw;
+   
+    
 }
 
+/* Staff Container */
 .staffcontainer {
     display: flex;
     justify-content: center; 
     align-items: flex-start; 
     flex-wrap: nowrap; 
-    margin-top: 20px;
+    margin-top: 2%;
 }
 
+/* Staff 1 */
 .staff1 {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-   
-   
     width: 14%;
-    margin: 10px;
-    
+    margin: 1%;
 }
 
 .staff1 img {
-    margin: 10px;
+    margin: 2%;
     object-fit: cover; 
-    width: 250px;
-    height: 300px;
- border-radius: 2px;
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
 }
+
+.staff1 img:hover {
+    filter: blur(2px);
+}
+
+/* Staff 2 */
 .staff2 {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
     width: 14%;
-    margin: 10px;
+    margin: 1%;
     margin-top: 4%;
-    
 }
 
 .staff2 img {
-    margin: 10px;
+    margin: 2%;
     object-fit: cover; 
-    width: 250px;
-    height: 300px;
+    width: 100%;
+    height: auto;
     border-radius: 2px;
 }
+
+.staff2 img:hover {
+    filter: blur(2px);
+}
+
+/* Staff 3 */
 .staff3 {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-   
     width: 14%;
-    margin: 10px;
+    margin: 1%;
     margin-top: 7%;
-    
 }
 
 .staff3 img {
-    margin: 10px;
+    margin: 2%;
     object-fit: cover; 
-    width: 250px;
-    height: 300px;
+    width: 100%;
+    height: auto;
     border-radius: 2px;
 }
-.staff1 img:hover {
-    filter: blur(2px);
-}
-.staff2 img:hover {
-    filter: blur(2px);
-}
+
 .staff3 img:hover {
     filter: blur(2px);
-    
+}
+.store-intro {
+    font-family: 'Arial', sans-serif;
+    color: #757171;
+    max-width: 1200px;
+    margin: auto;
+    margin-bottom: 4%;
+    font-size: 20px;
+    text-align: center;
 }
 
+.store-intro p {
+    line-height: 1.5;
+}
