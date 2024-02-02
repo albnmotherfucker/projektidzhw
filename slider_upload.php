@@ -1,72 +1,90 @@
 <?php
-$hostname = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'cart_db';
-$conn = mysqli_connect('localhost', 'root', '', 'cart_db');
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+class ImageUploader
+{
+    private $conn;
+    private $message;
+    public function __construct($hostname, $username, $password, $database)
+    {
+        $this->conn = new mysqli($hostname, $username, $password, $database);
 
-$message = "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
-    $targetDir = "uploaded_img";
-    $uploadOk = 1;
-
-    $rowId = 1;
-
-    $imgColumns = array("img1", "img2", "img3", "img4",);
-
-    $filenames = array();
-
-    for ($i = 1; $i <= 4; $i++) {
-        $fieldName = "image" . $i;
-
-        if (!empty($_FILES[$fieldName]["tmp_name"])) {
-            $filename = $_FILES[$fieldName]["name"];
-
-            $filenames[] = $filename;
-
-            move_uploaded_file($_FILES[$fieldName]["tmp_name"], $targetDir . $filename);
-
-            header("refresh:2;url=main_admin.php");
-        } else {
-            $message = "Error: Image $i was not provided.<br>";
+        if ($this->conn->connect_error) {
+            die("Connection failed: " . $this->conn->connect_error);
         }
     }
+    public function uploadImages()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
+            $targetDir = "uploaded_img";
+            $uploadOk = 1;
 
-    $checkQuery = "SELECT * FROM sliderimage WHERE id = $rowId";
-    $result = $conn->query($checkQuery);
+            $rowId = 1;
 
-    if ($result->num_rows > 0) {
-        $updateQuery = "UPDATE sliderimage SET ";
-        for ($j = 0; $j < count($imgColumns); $j++) {
-            $updateQuery .= $imgColumns[$j] . " = '" . $filenames[$j] . "'";
-            if ($j < count($imgColumns) - 1) {
-                $updateQuery .= ", ";
+            $imgColumns = array("img1", "img2", "img3", "img4");
+
+            $filenames = array();
+
+            for ($i = 1; $i <= 4; $i++) {
+                $fieldName = "image" . $i;
+
+                if (!empty($_FILES[$fieldName]["tmp_name"])) {
+                    $filename = $_FILES[$fieldName]["name"];
+
+                    $filenames[] = $filename;
+
+                    move_uploaded_file($_FILES[$fieldName]["tmp_name"], $targetDir . $filename);
+
+                    header("refresh:2;url=main_admin.php");
+                } else {
+                    $this->message = "Error: Image $i was not provided.<br>";
+                }
+            }
+
+            $checkQuery = "SELECT * FROM sliderimage WHERE id = $rowId";
+            $result = $this->conn->query($checkQuery);
+
+            if ($result->num_rows > 0) {
+                $updateQuery = "UPDATE sliderimage SET ";
+                for ($j = 0; $j < count($imgColumns); $j++) {
+                    $updateQuery .= $imgColumns[$j] . " = '" . $filenames[$j] . "'";
+                    if ($j < count($imgColumns) - 1) {
+                        $updateQuery .= ", ";
+                    }
+                }
+                $updateQuery .= " WHERE id = $rowId";
+
+                if ($this->conn->query($updateQuery) === TRUE) {
+                    $this->message = "Images have been updated in the database.<br>";
+                } else {
+                    $this->message = "Error updating record: " . $this->conn->error . "<br>";
+                }
+            } else {
+                $insertQuery = "INSERT INTO sliderimage (id, " . implode(", ", $imgColumns) . ") VALUES ($rowId, '" . implode("', '", $filenames) . "')";
+
+                if ($this->conn->query($insertQuery) === TRUE) {
+                    $this->message = "Images have been added to the database.<br>";
+                } else {
+                    $this->message = "Error inserting record: " . $this->conn->error . "<br>";
+                }
             }
         }
-        $updateQuery .= " WHERE id = $rowId";
+    }
 
-        if ($conn->query($updateQuery) === TRUE) {
-            $message = "Images have been updated in the database.<br>";
-        } else {
-            $message = "Error updating record: " . $conn->error . "<br>";
-        }
-    } else {
-        $insertQuery = "INSERT INTO sliderimage (id, " . implode(", ", $imgColumns) . ") VALUES ($rowId, '" . implode("', '", $filenames) . "')";
+    public function getMessage()
+    {
+        return $this->message;
+    }
 
-        if ($conn->query($insertQuery) === TRUE) {
-            $message = "Images have been added to the database.<br>";
-        } else {
-            $message = "Error inserting record: " . $conn->error . "<br>";
-        }
+    public function closeConnection()
+    {
+        $this->conn->close();
     }
 }
 
-$conn->close();
+$uploader = new ImageUploader('localhost', 'root', '', 'cart_db');
+$uploader->uploadImages();
+$message = $uploader->getMessage();
+$uploader->closeConnection();
 ?>
 
 <!DOCTYPE html>

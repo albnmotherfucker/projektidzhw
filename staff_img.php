@@ -2,27 +2,42 @@
 include 'config.php';
 include 'navbaradmin.php';
 
-if (isset($_POST['submit'])) {
-    $insertSql = "INSERT INTO stores_staff () VALUES ()";
-    mysqli_query($conn, $insertSql);
+class StaffImageUploader
+{
+    private $conn;
 
-    $lastInsertId = mysqli_insert_id($conn);
+    public function __construct($conn)
+    {
+        $this->conn = $conn;
+    }
 
-    for ($i = 1; $i <= 10; $i++) {
-        $staffImgName = "staff_img$i";
-        $staffImg = isset($_FILES[$staffImgName]['name']) ? $_FILES[$staffImgName]['name'] : '';
-        $staffImgTmpName = isset($_FILES[$staffImgName]['tmp_name']) ? $_FILES[$staffImgName]['tmp_name'] : '';
+    public function uploadStaffImages()
+    {
+        if (isset($_POST['submit'])) {
+            $insertSql = "INSERT INTO stores_staff () VALUES ()";
+            mysqli_query($this->conn, $insertSql);
 
-        if (!empty($staffImg)) {
-            $uploadPath = "uploaded_staff_images/$staffImg";
-            move_uploaded_file($staffImgTmpName, $uploadPath);
+            $lastInsertId = mysqli_insert_id($this->conn);
 
-            // Update the database with the image name in the appropriate column
-            $updateImgSql = "UPDATE stores_staff SET img$i = '$staffImg' WHERE id = $lastInsertId";
-            mysqli_query($conn, $updateImgSql);
+            for ($i = 1; $i <= 10; $i++) {
+                $staffImgName = "staff_img$i";
+                $staffImg = isset($_FILES[$staffImgName]['name']) ? $_FILES[$staffImgName]['name'] : '';
+                $staffImgTmpName = isset($_FILES[$staffImgName]['tmp_name']) ? $_FILES[$staffImgName]['tmp_name'] : '';
+
+                if (!empty($staffImg)) {
+                    $uploadPath = "uploaded_staff_images/$staffImg";
+                    move_uploaded_file($staffImgTmpName, $uploadPath);
+
+                    $updateImgSql = "UPDATE stores_staff SET img$i = '$staffImg' WHERE id = $lastInsertId";
+                    mysqli_query($this->conn, $updateImgSql);
+                }
+            }
         }
     }
 }
+
+$staffImageUploader = new StaffImageUploader($conn);
+$staffImageUploader->uploadStaffImages();
 ?>
 
 <!DOCTYPE html>
@@ -38,45 +53,11 @@ if (isset($_POST['submit'])) {
         <form class="FORM" action="staff_img.php" method="post" enctype="multipart/form-data">
             <h3>Staff Image Upload</h3>
 
-            <label for="staff_img1">Staff Image 1:</label>
-            <input type="file" name="staff_img1" id="staff_img1"  class="box">
-            <br>
-
-            <label for="staff_img2">Staff Image 2:</label>
-            <input type="file" name="staff_img2" id="staff_img2" class="box">
-            <br>
-
-            <label for="staff_img3">Staff Image 3:</label>
-            <input type="file" name="staff_img3" id="staff_img3" class="box">
-            <br>
-
-            <label for="staff_img4">Staff Image 4:</label>
-            <input type="file" name="staff_img4" id="staff_img4"  class="box">
-            <br>
-
-            <label for="staff_img5">Staff Image 5:</label>
-            <input type="file" name="staff_img5" id="staff_img5" class="box">
-            <br>
-
-            <label for="staff_img6">Staff Image 6:</label>
-            <input type="file" name="staff_img6" id="staff_img6" class="box">
-            <br>
-
-            <label for="staff_img7">Staff Image 7:</label>
-            <input type="file" name="staff_img7" id="staff_img7" class="box">
-            <br>
-
-            <label for="staff_img8">Staff Image 8:</label>
-            <input type="file" name="staff_img8" id="staff_img8" class="box">
-            <br>
-
-            <label for="staff_img9">Staff Image 9:</label>
-            <input type="file" name="staff_img9" id="staff_img9" class="box">
-            <br>
-
-            <label for="staff_img10">Staff Image 10:</label>
-            <input type="file" name="staff_img10" id="staff_img10" class="box">
-            <br>
+            <?php for ($i = 1; $i <= 10; $i++): ?>
+                <label for="staff_img<?= $i ?>">Staff Image <?= $i ?>:</label>
+                <input type="file" name="staff_img<?= $i ?>" id="staff_img<?= $i ?>" class="box">
+                <br>
+            <?php endfor; ?>
 
             <input type="submit" class="btn" value="Upload Staff Images" name="submit">
         </form>

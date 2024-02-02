@@ -111,7 +111,7 @@ if (isset($_POST['submit'])) {
             <input type="submit" id="btn" value="Log In" name="submit"/>
         </form>
 
-        <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
+        <p>Don't have an account? <a id="logi" href="signup.php">Sign Up</a></p>
     </div>
 </body>
 </html>

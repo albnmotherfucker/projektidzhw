@@ -142,7 +142,6 @@ if (isset($message)) {
 <div class="footer">
    <link rel="stylesheet" href="style.css">
         <h2>Questions? call 044-620328</h2>
-        <!-- Rest of your footer HTML -->
     </div>
             
 </body>

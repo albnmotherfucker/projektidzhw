@@ -1,42 +1,52 @@
 <?php
 
-$hostname = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'cart_db';
+class CaptionManager {
+    private $conn;
+    private $message = "";
+    public function __construct($hostname, $username, $password, $database) {
+        $this->conn = mysqli_connect($hostname, $username, $password, $database);
 
-$conn = mysqli_connect($hostname, $username, $password, $database);
+        if ($this->conn->connect_error) {
+            die("Connection failed: " . $this->conn->connect_error);
+        }
+    }
+    public function processCaptionSubmission() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $caption1 = $this->conn->real_escape_string($_POST["caption1"]);
+            $caption2 = $this->conn->real_escape_string($_POST["caption2"]);
+            $caption3 = $this->conn->real_escape_string($_POST["caption3"]);
+            $caption4 = $this->conn->real_escape_string($_POST["caption4"]);
+            $caption5 = $this->conn->real_escape_string($_POST["caption5"]);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+            $this->deleteExistingCaptions($caption1, $caption2, $caption3, $caption4, $caption5);
 
-$message = ""; 
+            $sql = "INSERT INTO about (caption1, caption2, caption3, caption4, caption5) VALUES ('$caption1', '$caption2', '$caption3', '$caption4', '$caption5')";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $caption1 = $conn->real_escape_string($_POST["caption1"]);
-    $caption2 = $conn->real_escape_string($_POST["caption2"]);
-    $caption3 = $conn->real_escape_string($_POST["caption3"]);
-    $caption4 = $conn->real_escape_string($_POST["caption4"]);
-    $caption5 = $conn->real_escape_string($_POST["caption5"]);
+            if ($this->conn->query($sql) === TRUE) {
+                $this->message = "Caption successfully submitted!";
+                header("refresh:2;url=about_admin.php");
+            } else {
+                echo "Error: " . $sql . "<br>" . $this->conn->error;
+            }
+        }
+    }
+    private function deleteExistingCaptions($caption1, $caption2, $caption3, $caption4, $caption5) {
+        $deleteQuery = "DELETE FROM about WHERE caption1 = '$caption1' OR caption2 = '$caption2' OR caption3 = '$caption3' OR caption4 = '$caption4' OR caption5 = '$caption5'";
+        $this->conn->query($deleteQuery);
+    }
 
-    $deleteQuery = "DELETE FROM about WHERE caption1 = '$caption1' OR caption2 = '$caption2' OR caption3 = '$caption3' OR caption4 = '$caption4' OR caption5 = '$caption5'";
-    $conn->query($deleteQuery);
+    public function showMessage() {
+        return $this->message;
+    }
 
-    $sql = "INSERT INTO about (caption1, caption2, caption3, caption4, caption5) VALUES ('$caption1', '$caption2', '$caption3', '$caption4', '$caption5')";
-
-    if ($conn->query($sql) === TRUE) {
-        $message = "Caption successfully submitted!";
-        header("refresh:2;url=about_admin.php");
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+    public function closeConnection() {
+        $this->conn->close();
     }
 }
 
-$conn->close();
-
+$captionManager = new CaptionManager('localhost', 'root', '', 'cart_db');
+$captionManager->processCaptionSubmission();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,11 +76,11 @@ $conn->close();
 </head>
 <body>
     <div class="message-container">
-        <?php echo $message; ?>
+        <?php echo $captionManager->showMessage(); ?>
     </div>
-    
-    <script>
-       
-    </script>
 </body>
 </html>
+
+<?php
+$captionManager->closeConnection();
+?>

@@ -1,40 +1,52 @@
 <?php
 
-$hostname = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'cart_db';
+class CaptionSubmitter {
+    private $conn;
 
-$conn = mysqli_connect('localhost', 'root', '', 'cart_db');
+    public function __construct($hostname, $username, $password, $database) {
+        $this->conn = new mysqli($hostname, $username, $password, $database);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+        if ($this->conn->connect_error) {
+            die("Connection failed: " . $this->conn->connect_error);
+        }
+    }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $caption_id1 = $_POST["caption_id1"];
-    $caption_id2 = $_POST["caption_id2"];
+    public function submitCaption() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $caption_id1 = $this->sanitizeInput($_POST["caption_id1"]);
+            $caption_id2 = $this->sanitizeInput($_POST["caption_id2"]);
 
-    $caption_id1 = $conn->real_escape_string($caption_id1);
-    $caption_id2 = $conn->real_escape_string($caption_id2);
+            $this->deleteExistingCaptions($caption_id1, $caption_id2);
 
-  
-    $deleteQuery = "DELETE FROM projekticaption WHERE caption_id1 = '$caption_id1' OR caption_id2 = '$caption_id2'";
-    $conn->query($deleteQuery);
+            $sql = "INSERT INTO projekticaption (caption_id1, caption_id2) VALUES ('$caption_id1', '$caption_id2')";
 
-  
-    $sql = "INSERT INTO projekticaption (caption_id1, caption_id2) VALUES ('$caption_id1', '$caption_id2')";
+            if ($this->conn->query($sql) === TRUE) {
+                return "Caption successfully submitted!";
+            } else {
+                return "Error: " . $sql . "<br>" . $this->conn->error;
+            }
+        }
+    }
 
-    if ($conn->query($sql) === TRUE) {
-        $message = "Caption successfully submitted!";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+    private function sanitizeInput($input) {
+        return $this->conn->real_escape_string($input);
+    }
+
+    private function deleteExistingCaptions($caption_id1, $caption_id2) {
+        $deleteQuery = "DELETE FROM projekticaption WHERE caption_id1 = '$caption_id1' OR caption_id2 = '$caption_id2'";
+        $this->conn->query($deleteQuery);
+    }
+
+    public function closeConnection() {
+        $this->conn->close();
     }
 }
 
-$conn->close();
-?>
+$captionSubmitter = new CaptionSubmitter('localhost', 'root', '', 'cart_db');
+$message = $captionSubmitter->submitCaption();
+$captionSubmitter->closeConnection();
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">

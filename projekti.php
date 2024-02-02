@@ -1,38 +1,58 @@
 <?php
 
-$hostname = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'db_cart';
-$conn = mysqli_connect('localhost', 'root', '', 'cart_db');
+class Database {
+    private $conn;
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    public function __construct($hostname, $username, $password, $database) {
+        $this->conn = new mysqli($hostname, $username, $password, $database);
+
+        if ($this->conn->connect_error) {
+            die("Connection failed: " . $this->conn->connect_error);
+        }
+    }
+
+    public function getLatestProjectCaption() {
+        $result = $this->conn->query("SELECT * FROM projekticaption ORDER BY id DESC LIMIT 1");
+
+        if ($result) {
+            $row = $result->fetch_assoc();
+            return [
+                'caption_id1' => $row['caption_id1'],
+                'caption_id2' => $row['caption_id2']
+            ];
+        } else {
+            die("Error fetching captions: " . $this->conn->error);
+        }
+    }
+
+    public function getLatestSliderImages() {
+        $result = $this->conn->query("SELECT * FROM sliderimage ORDER BY id DESC LIMIT 1");
+
+        if ($result) {
+            $row = $result->fetch_assoc();
+            return [
+                'image1' => $row['img1'],
+                'image2' => $row['img2'],
+                'image3' => $row['img3'],
+                'image4' => $row['img4']
+            ];
+        } else {
+            die("Error fetching images: " . $this->conn->error);
+        }
+    }
+
+    public function closeConnection() {
+        $this->conn->close();
+    }
 }
 
-$result = $conn->query("SELECT * FROM projekticaption ORDER BY id DESC LIMIT 1");
+$database = new Database('localhost', 'root', '', 'cart_db');
 
-if ($result) {
-    $row = $result->fetch_assoc();
-    $latestCaption_id1 = $row['caption_id1'];
-    $latestCaption_id2 = $row['caption_id2'];
-} else {
-    die("Error fetching captions: " . $conn->error);
-}
+$projectCaption = $database->getLatestProjectCaption();
+$sliderImages = $database->getLatestSliderImages();
 
-$result = $conn->query("SELECT * FROM sliderimage ORDER BY id DESC LIMIT 1");
+$database->closeConnection();
 
-if ($result) {
-    $row = $result->fetch_assoc();
-    $image1 = $row['img1'];
-    $image2 = $row['img2'];
-    $image3 = $row['img3'];
-    $image4 = $row['img4'];
-} else {
-    die("Error fetching images: " . $conn->error);
-}
-
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -42,9 +62,14 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-   
     <script src="java.js" defer></script>
-</head>         
+    <style>
+        .slider-wrapper img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
 <body>
     <div class="header" id="myHeader">
         <nav>
@@ -59,20 +84,13 @@ $conn->close();
     </div>
     
     <section class="container">
-        <style>
-            .slider-wrapper img {
-                width: 100%;
-                height: 100%;
-            }
-        </style>
-    
         <div class="slider-wrapper">
             <div class="slider">
-                <h1 id="helmi" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"><?php echo $latestCaption_id1; ?></h1>
+                <h1 id="helmi" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"><?php echo $projectCaption['caption_id1']; ?></h1>
                 
-                <img id="slide-1" src="<?php echo $image1; ?>" alt="Image 1" />
-                <img id="slide-2" src="<?php echo $image2; ?>" alt="Image 2" />
-                <img id="slide-3" src="<?php echo $image3; ?>" alt="Image 3" />
+                <img id="slide-1" src="<?php echo $sliderImages['image1']; ?>" alt="Image 1" />
+                <img id="slide-2" src="<?php echo $sliderImages['image2']; ?>" alt="Image 2" />
+                <img id="slide-3" src="<?php echo $sliderImages['image3']; ?>" alt="Image 3" />
             </div> 
             <div class="slider-nav">
                 <a href="#slide-1"></a>
@@ -85,10 +103,10 @@ $conn->close();
     <div class="Pastaj">
         <div class="row">
             <div class="text-col">
-                <h2 id="caption_id2"><?php echo $latestCaption_id2; ?></h2>
+                <h2 id="caption_id2"><?php echo $projectCaption['caption_id2']; ?></h2>
             </div>
             <div class="img-col">
-                <a href="produktet.php"><img src="<?php echo $image4; ?>" ></a>
+                <a href="produktet.php"><img src="<?php echo $sliderImages['image4']; ?>" ></a>
             </div>
         </div>
     </div>
