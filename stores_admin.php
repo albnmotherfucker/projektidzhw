@@ -14,20 +14,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
 
         move_uploaded_file($_FILES[$imageName]['tmp_name'], $targetDir . $image);
 
-        $updateSql = "UPDATE stores_locations SET img$i = '$image', caption$i = '$caption'";
-        $result = mysqli_query($conn, $updateSql);
+        // Check if the table is empty
+        $checkEmptySql = "SELECT COUNT(*) as rowCount FROM stores_locations";
+        $checkEmptyResult = mysqli_query($conn, $checkEmptySql);
 
-        if (!$result) {
-            $message = "Error updating data: " . mysqli_error($conn);
+        if (!$checkEmptyResult) {
+            $message = "Error checking data: " . mysqli_error($conn);
+        } else {
+            $row = mysqli_fetch_assoc($checkEmptyResult);
+            $rowCount = $row['rowCount'];
+
+            if ($rowCount > 0) {
+                // Rows exist, perform an update
+                $updateSql = "UPDATE stores_locations SET img$i = '$image', caption$i = '$caption'";
+                $result = mysqli_query($conn, $updateSql);
+
+                if (!$result) {
+                    $message = "Error updating data: " . mysqli_error($conn);
+                }
+            } else {
+                // Table is empty, perform an insert
+                $insertSql = "INSERT INTO stores_locations (img$i, caption$i) VALUES ('$image', '$caption')";
+                $result = mysqli_query($conn, $insertSql);
+
+                if (!$result) {
+                    $message = "Error inserting data: " . mysqli_error($conn);
+                }
+            }
         }
     }
 
     if (empty($message)) {
-        $message = "Data added successfully!";
+        $message = "Data added or updated successfully!";
     }
 }
-
 ?>
+
+<!-- Your HTML code remains unchanged -->
+
+
+<!-- Your HTML code remains unchanged -->
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
