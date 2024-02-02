@@ -9,7 +9,6 @@
 
 }
 
-/* Stores Section */
 .stores {
     display: flex;
     justify-content: space-around;
@@ -29,11 +28,9 @@
 
 .stores a {
     display: flex;
-   
     padding: 2%;
   text-align: center;
     font-size: 1.5vw;
-   
     
 }
 

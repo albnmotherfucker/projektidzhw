@@ -5,6 +5,8 @@
             <div>
                 <a href="main_admin.php"><button>MAIN PAGE</button></a>
                 <a href="admin_page.php"><button>PRODUCTS PAGE</button></a>
+                <a href="stores_admin.php"><button>STORES LOCATION</button></a>
+                <a href="staff_img.php"><button>STORES STAFF</button></a>
                 <a href="about_admin.php"><button>ABOUT US</button></a>
                 <a href="users_admin.php"><button>USERSS</button></a>
 

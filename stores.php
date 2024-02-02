@@ -1,9 +1,27 @@
 <?php
 include 'navbar.php';
-?>
-<!DOCTYPE html>
+include 'config.php';
 
+// Fetching store locations
+$storeSql = "SELECT id, img1, caption1, img2, caption2, img3, caption3 FROM stores_locations ORDER BY id DESC LIMIT 1";
+$storeResult = $conn->query($storeSql);
+
+$staffImages = array();
+$staffSql = "SELECT * FROM stores_staff ORDER BY id DESC LIMIT 1";
+$staffResult = mysqli_query($conn, $staffSql);
+
+if ($row = mysqli_fetch_assoc($staffResult)) {
+    for ($i = 1; $i <= 10; $i++) {
+        $staffImages[$i] = $row["img$i"];
+    }
+}
+
+mysqli_free_result($staffResult);
+?>
+
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,58 +29,82 @@ include 'navbar.php';
     <link rel="stylesheet" href="stylestores.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="titulli">
-        <p> Our Stores </p>  
-</div>
-<div class="stores">
-    <div><img src="Aktashi.webp" alt=""> <a >Aktash <br> Rr - Rexhep Mala nr 24 <br> Perballe menzes se studenteve</a></div>
-    <div><img src="Sheshi.webp" alt=""> <a >Sheshi - Nene Tereza <br> Rr - Rexhep Luci</a></div>
-    <div><img src="Prishtina_Mall.webp" alt=""> <a >Prishtina Mall - Kati perdhese <br> Korridori i djathte</a></div>
-    
-</div>
-<div class="Titulli">
-    <p> Our Staff</p>
-</div>
-   </div> 
-   <div class="store-intro">
-    <p>Welcome to our world of quality and style. Our stores, nestled in diverse communities, offer an inviting experience where modern aesthetics meet timeless elegance. 
-        <br>Explore curated products reflecting our commitment to excellence, guided by our knowledgeable staff. 
-   </div>
+        <p>Our Stores</p>
     </div>
-    <div class="staffcontainer" >
-        
-    <div class="staff1">
-    <div ><img src="a1.jpg" alt=""> <a ></a> </div>
-    <div ><img src="a2.webp" alt=""><a ></a></div>
-    
-    
-</div>
-<div class="staff2">
-    <div><img src="a3.webp" alt=""></div>
-    <div><img src="a4.webp" alt=""> </div>
-    
-    
-</div>
-<div class="staff3">
-    <div><img src="a5.webp" alt=""> </div>
-    <div><img src="a6.webp" alt=""> </div>
-    
-    
-</div>
-<div class="staff2">
-    <div><img src="a7.webp" alt=""> </div>
-    <div><img src="a8.webp" alt=""> </div>
-    
-    
-</div>
-<div class="staff1">
-    <div><img src="a9.webp" alt=""> </div>
-    <div><img src="a10.webp" alt=""> </div>
-    
-</div></div>
+    <div class="stores">
+        <?php
+        if ($storeResult) {
+            if ($storeResult->num_rows > 0) {
+                $row = $storeResult->fetch_assoc();
+                echo '<div>';
+                echo '<img src="' . $row['img1'] . '" alt="">';
+                echo '<div class="store-info">';
+                echo '<a>' . $row['caption1'] . '</a>';
+                echo '</div>';
+                echo '</div>';
 
-<div class="footer">
+                echo '<div>';
+                echo '<img src="' . $row['img2'] . '" alt="">';
+                echo '<div class="store-info">';
+                echo '<a>' . $row['caption2'] . '</a>';
+                echo '</div>';
+                echo '</div>';
+
+                echo '<div>';
+                echo '<img src="' . $row['img3'] . '" alt="">';
+                echo '<div class="store-info">';
+                echo '<a>' . $row['caption3'] . '</a>';
+                echo '</div>';
+                echo '</div>';
+            } else {
+                echo 'No stores found.';
+            }
+        } else {
+            die("Error in SQL query: " . $conn->error);
+        }
+
+        $conn->close();
+        ?>
+    </div>
+    <div class="Titulli">
+        <p> Our Staff</p>
+    </div>
+    <div class="store-intro">
+        <p>Welcome to our world of quality and style. Our stores, nestled in diverse communities, offer an inviting experience where modern aesthetics meet timeless elegance.
+            <br>Explore curated products reflecting our commitment to excellence, guided by our knowledgeable staff.
+        </p>
+    </div>
+    <div class="staffcontainer">
+        <div class="staff1">
+            <img src="uploaded_staff_images/<?php echo $staffImages[1]; ?>" alt="Image 1" />
+            <img src="uploaded_staff_images/<?php echo $staffImages[2]; ?>" alt="Image 2" />
+        </div>
+
+        <div class="staff2">
+            <div><img src="uploaded_staff_images/<?php echo $staffImages[3]; ?>" alt=""></div>
+            <div><img src="uploaded_staff_images/<?php echo $staffImages[4]; ?>" alt=""></div>
+        </div>
+
+        <div class="staff3">
+            <div><img src="uploaded_staff_images/<?php echo $staffImages[5]; ?>" alt=""></div>
+            <div><img src="uploaded_staff_images/<?php echo $staffImages[6]; ?>" alt=""></div>
+        </div>
+
+        <div class="staff2">
+            <div><img src="uploaded_staff_images/<?php echo $staffImages[7]; ?>" alt=""></div>
+            <div><img src="uploaded_staff_images/<?php echo $staffImages[8]; ?>" alt=""></div>
+        </div>
+
+        <div class="staff1">
+            <div><img src="uploaded_staff_images/<?php echo $staffImages[9]; ?>" alt=""></div>
+            <div><img src="uploaded_staff_images/<?php echo $staffImages[10]; ?>" alt=""></div>
+        </div>
+    </div>
+
+    <div class="footer">
         <h2>Questions? Call 044-620328</h2>
         <div class="row">
             <div class="col">
@@ -90,6 +132,7 @@ include 'navbar.php';
             </div>
         </div>
     </div>
-  
+
 </body>
+
 </html>
