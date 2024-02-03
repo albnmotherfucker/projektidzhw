@@ -76,7 +76,7 @@ $signUpHandler->handleSignUp();
   </head>
   <body>
       
-      <?php include "navbar.php";?>
+      <?php include "header.php";?>
  
       <div id="form">
         <h1>Sign Up</h1>
