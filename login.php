@@ -55,12 +55,10 @@ class Authentication {
                 header("Location: admin_page.php?admin=$role");
                 exit();
             } else {
-                // If the username is not 'erjon' or 'rion', redirect to 'projekti.php'
                 header("Location: projekti.php");
                 exit();
             }
         } else {
-            // If authentication fails, show an alert and redirect to 'login.php'
             echo '<script>
                 alert("Invalid username or password!!");
                 window.location.href = "login.php";
