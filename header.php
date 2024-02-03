@@ -87,6 +87,10 @@
                 background-color: #000;
                 width: 100%;
             }
+            .logo{
+                width: 30%;
+            }
+         
         }
     </style>
    <script>

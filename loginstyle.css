@@ -1,9 +1,9 @@
 body {
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: relative;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+ 
 }
 
 #form {
@@ -51,20 +51,7 @@ form label {
   font-weight: 500;
 }
 
-p {
-  margin: 8%;
-  color: black;
-}
 
-
-a {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: black;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-}
 
 a:hover {
   transform: scale(1.01);
@@ -94,5 +81,7 @@ a:hover {
     width: 80%;
     margin-left: none;
     padding: 40px;
+    margin-top: 20%;
   }
+ 
 }

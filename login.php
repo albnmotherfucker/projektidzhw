@@ -99,7 +99,7 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="loginstyle.css">
 </head>
 <body>
-    <?php include "navbar.php";?>
+    <?php include "header.php";?>
     
     <div id="form">
         <h1>Log In</h1>
