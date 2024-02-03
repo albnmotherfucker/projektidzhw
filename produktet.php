@@ -49,6 +49,7 @@ $products = $productPage->getProducts();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Page</title>
     <link rel="stylesheet" href="style.css">
+    <?php include 'header.php'?>
     <style>
         .product img {
             width: 200px;
@@ -58,17 +59,7 @@ $products = $productPage->getProducts();
 </head>
 
 <body>
-    <div class="header" id="myHeader" style="background-color: black;">
-        <nav>
-            <a href="projekti.php"><img src="luciano_main-350x120 (1).png" class="logo"></a>
-            <div>
-                <a href="produktet.php"><button>Products</button></a>
-                <a href="stores.php"><button>Stores</button></a>
-                <a href="about.php"><button>About Us</button></a>
-                <a href="login.php"><button>Log In</button></a>
-            </div>
-        </nav>
-    </div>
+    
 
     <div class="visit">
         <p style="font-size: 25px; margin-left: 35px;">Discover our collection</p>

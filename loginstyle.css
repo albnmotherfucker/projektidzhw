@@ -75,7 +75,7 @@ p{
 
 @media screen and (max-width: 1350px) {
   #form {
-    width: 40%;
+    width: 60%;
     margin-left: none;
     padding: 40px;
   }
@@ -91,11 +91,19 @@ p{
 
 @media screen and (max-width: 700px) {
   #form {
-    width: 90%;
+    width: 40%;
     margin-left: none;
     padding: 40px;
     margin-top: 20%;
   }
-  
+}
+  @media screen and (max-width: 400px) {
+    #form {
+      width: 40%;
+      margin-left: none;
+      padding: 40px;
+      margin-top: 20%;
+    }
+    
  
 }

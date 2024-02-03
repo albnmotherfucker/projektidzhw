@@ -415,10 +415,7 @@ input[type="radio"]{
 
 @media only screen and (max-width: 1340px) {
    
-    .logo {
-       
-       
-    }
+    
 
     nav button {
         padding: 5px 10px;
@@ -496,7 +493,26 @@ input[type="radio"]{
         justify-content: center; 
         flex-wrap: wrap; 
     }
-}
+
+    .tekstiabout {
+        max-width: 1000px; 
+        text-align: start;
+        padding: 20px;
+        margin: 100px auto; 
+        font-size: 4%;
+        
+    }
+    .fotoabout img {
+        width: 100%;
+        height: auto;
+    }
+    
+    #aboutluciano{
+        font-size: 30px;
+    }
+
+
+
     
 
 .butonat{
@@ -519,4 +535,20 @@ input[type="radio"]{
     color: white;
     border: solid 1px white;
     
+    
+}
+
+
+#helmi{
+    font-size: 120%;
+}
+
+
+
+
+
+
+
+
+
 }

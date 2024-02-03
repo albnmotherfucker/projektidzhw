@@ -58,19 +58,10 @@ class AboutPage {
             <title>Document</title>
             <link rel="stylesheet" href="style.css">
             <script src="java.js" defer></script>
+            <?php include 'header.php'?>
         </head>
         <body>
-            <div class="header" id="myHeader">
-                <nav>
-                    <a href="projekti.php"><img src="luciano_main-350x120 (1).png" class="logo"></a>
-                    <div>
-                        <a href="produktet.php"><button>Products</button></a>
-                        <a href="stores.php"><button>Stores</button></a>
-                        <a href="about.php"><button>About Us</button></a>
-                        <a href="login.php"><button>Log In</button></a>
-                    </div>
-                </nav>
-            </div>
+           
 
             <div class="fotoabout">
                 <img src="uploaded_img/<?php echo $this->image; ?>" alt="image">  

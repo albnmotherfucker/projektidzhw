@@ -54,10 +54,11 @@ class StorePage {
             <title>Document</title>
             <link rel="stylesheet" href="stylestores.css">
             <link rel="stylesheet" href="style.css">
+            <?php include 'header.php'?>
         </head>
         <body>
             <div class="titulli">
-                <p>Our Stores</p>
+                <p  >Our Stores</p>
             </div>
             <div class="stores">
         <?php
@@ -93,7 +94,7 @@ class StorePage {
     private function renderStaffIntroduction() {
         ?>
             </div>
-            <div class="Titulli">
+            <div class="titulli">
                 <p> Our Staff</p>
             </div>
             <div class="store-intro">
@@ -174,7 +175,6 @@ class StorePage {
     }
 }
 
-include 'navbar.php';
 include 'config.php';
 
 $storePage = new StorePage($conn);

@@ -120,6 +120,112 @@
     text-align: center;
 }
 
+
+@media only screen and (max-width: 1340px){
+
+.stores img{
+    width: 80%;
+    height: auto;
+    margin-left: 10%;
+}
+.store-info{
+margin-left: 10%;
+}
 .store-intro p {
-    line-height: 1.5;
+margin-left: 25%;
+width: 50%;
+margin-top: 10%;
+
+    font-size: 50%;
+}
+.titulli{
+    margin-top: 20%
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 }
