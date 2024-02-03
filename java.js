@@ -4,7 +4,7 @@ function scrollFunction() {
     var header = document.getElementById("myHeader");
     var buttons = document.querySelectorAll(".header button");
 
-    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
         header.style.backgroundColor = "black";
         buttons.forEach(function(button) {
             button.style.backgroundColor = "#303030";

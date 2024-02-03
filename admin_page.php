@@ -74,7 +74,6 @@ $adminPage->addProduct();
 $adminPage->deleteProduct();
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

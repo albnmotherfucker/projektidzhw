@@ -71,11 +71,12 @@ a:hover {
 p{
   margin-top: 4%;
   color: #000000;
+  
 }
 
 @media screen and (max-width: 1350px) {
   #form {
-    width: 60%;
+    width: 40%;
     margin-left: none;
     padding: 40px;
   }
@@ -91,7 +92,7 @@ p{
 
 @media screen and (max-width: 700px) {
   #form {
-    width: 40%;
+    width: 60%;
     margin-left: none;
     padding: 40px;
     margin-top: 20%;
@@ -99,11 +100,19 @@ p{
 }
   @media screen and (max-width: 400px) {
     #form {
-      width: 40%;
+      width: 60%;
       margin-left: none;
       padding: 40px;
       margin-top: 20%;
     }
-    
+    #logi{
+      white-space: nowrap;
+      
+    }
+   #form #btn { 
+      width: 40%;
+      font-size: 70%;
+
+    }
  
 }

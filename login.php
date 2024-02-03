@@ -96,10 +96,10 @@ if (isset($_POST['submit'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Rioni</title>
-    <link rel="stylesheet" href="loginstyle.css">
+    <link rel="stylesheet" href="loginstyle.css"> <?php include "header.php";?>
 </head>
 <body>
-    <?php include "header.php";?>
+   
     
     <div id="form">
         <h1>Log In</h1>
@@ -109,7 +109,9 @@ if (isset($_POST['submit'])) {
             <input type="submit" id="btn" value="Log In" name="submit"/>
         </form>
 
-        <p>Don't have an account? <a id="logi" href="signup.php">Sign Up</a></p>
+        <p>Don't have an account? </p>
+        <br>
+        <a id="logi" href="signup.php">Sign Up</a>
     </div>
 </body>
 </html>

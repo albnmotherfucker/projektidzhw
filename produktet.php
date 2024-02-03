@@ -52,9 +52,23 @@ $products = $productPage->getProducts();
     <?php include 'header.php'?>
     <style>
         .product img {
-            width: 200px;
-            height: 200px;
+            width: 80%;
+            height: 80%;
+            
+    object-fit: cover; 
         }
+        @media only screen and (max-width: 1340px) {
+            .product img {
+                margin-top: 100%;
+           width: 100%;
+           height: 50%;
+            object-fit: cover; 
+        }
+        .pagination{
+            width: 100%;
+        }
+       
+        
     </style>
 </head>
 
